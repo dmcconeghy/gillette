@@ -1,0 +1,4 @@
+.ProductTable {
+    display: flex;
+    flex-wrap: wrap;
+}

@@ -1,0 +1,13 @@
+.ProductCard {
+
+    background-color:cadetblue;
+    width: 250px;
+    min-height: fit-content;
+    padding: 10px;
+      
+}
+
+.Product {
+    background-color: honeydew;
+    
+}
