@@ -1,5 +1,3 @@
-import React from 'react'
-
 import './ProductTable.css'
 import Product from './Product'
 
