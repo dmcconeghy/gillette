@@ -44,4 +44,6 @@ Contact: david.mcconeghy@gmail.com
   - Time permitting, create detailed product view modal
 
 ### Bug Tracking
-  1/21/22 - Search feature bugs: "clothing" returns 0 items; Using multiple search terms fails.  
+  1/21/22 - Search feature bugs: 
+    - ~~"clothing" returns 0 items;~~ Using multiple search terms fails if words not found in exactly that order/spacing
+    - Found a misplaced ) causing category and description not to be searched. 
