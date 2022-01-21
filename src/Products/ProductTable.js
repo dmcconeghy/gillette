@@ -1,5 +1,5 @@
 import './ProductTable.css'
-import Product from './Product'
+import ProductCard from './ProductCard'
 
 
 //By default the ProductTable returns all 20 items in the Fake Store API.
@@ -33,10 +33,10 @@ function ProductTable({ productIdArray = null }) {
          <div className="ProductTable">
              {productIdArray ? (
                  (validatedIdArray.map(idx => 
-                    (<Product number={idx} key={idx}/>)))
+                    (<ProductCard number={idx} key={idx}/>)))
                  )
             : (allProductsArray.map(idx => 
-                (<Product number={idx+1} key={idx+1}/>)))
+                (<ProductCard number={idx+1} key={idx+1}/>)))
              } 
              
        </div>
