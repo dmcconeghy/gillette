@@ -33,8 +33,7 @@ function Search() {
 
     
  // Currently this returns the default 20 item ProductTable on initial rendering 
- // It also fails to remove the prior state on re-render.
- // Finally, rendering the productTable within the Header returns unwanted layout issues. 
+ // For now the search executes and returns inside the App > Body > Search
 
   return (
       <>
