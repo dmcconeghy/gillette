@@ -38,7 +38,7 @@ function Search() {
 
   return (
       <>
-      <span className="Search Header"> 
+      <span className="Search"> 
           <SearchForm search = { search } />
       </span>
       <div className="ProductTable">
