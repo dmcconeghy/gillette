@@ -36,3 +36,9 @@ Contact: david.mcconeghy@gmail.com
   - Starting the logic to pull multiple products
   - Breaking product component into small units so that props can be more added/removed from different views
   - Add simple search 
+
+#### 1/21/22
+- Adding filters and sorting for category, price
+  - Continue to abstract reuseable component pieces
+  - Work on additional styling for product cards
+  - Time permitting, create detailed product view modal
