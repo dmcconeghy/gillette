@@ -42,3 +42,6 @@ Contact: david.mcconeghy@gmail.com
   - Continue to abstract reuseable component pieces
   - Work on additional styling for product cards
   - Time permitting, create detailed product view modal
+
+### Bug Tracking
+  1/21/22 - Search feature bugs: "clothing" returns 0 items; Using multiple search terms fails.  
