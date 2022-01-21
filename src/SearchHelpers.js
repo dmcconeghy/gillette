@@ -15,7 +15,7 @@ async function executeSearch(searchTerm = "") {
     // the g flag returns all results, not just the first one
     const searchExpression = new RegExp('.*' + searchTerm + '.*', 'gi')
   
-    const filteredResponse = catalog.filter(item => searchExpression.test(item.title) || searchExpression.test(item.description))
+    const filteredResponse = catalog.filter(item => searchExpression.test(item.title) || searchExpression.test(item.description || searchExpression.test(item.category)))
 
     // returns an array of products 
     return filteredResponse
