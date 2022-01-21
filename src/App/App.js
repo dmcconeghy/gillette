@@ -9,10 +9,10 @@ import Body from '../Body/Body';
 function App() {
 return (
     <div className="App">
-      <div className="Appwrapper">
+      
         <Header />
         <Body />
-      </div>
+      
     </div>
   )
 }
