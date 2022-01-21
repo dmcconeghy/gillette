@@ -22,6 +22,7 @@ function Product({number = 1 }) {
                 
                 <h4>{product.title}</h4>
                 <img src={product.image} alt={product.description} height="50px"></img>
+                <p>{product.category}</p>
                 <p>{product.price}</p>
                 </div>
             ) : 'Loading...'}

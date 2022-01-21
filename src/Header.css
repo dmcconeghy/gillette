@@ -1,7 +1,10 @@
 .Header {
-    display: flex;
+    /* display: flex;
     justify-content: flex-start;
-    align-items: center;
+    align-items: center; */
+    /* Temporary fix while components are rendering in the header rather than the main div */
+    display: inline-block;
+    
 }
 
 .HeaderComponent {

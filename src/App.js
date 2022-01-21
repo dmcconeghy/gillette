@@ -12,7 +12,7 @@ return (
     <div className="App">
       <div className="Appwrapper">
         <Header />
-        <ProductTable productIdArray={[5,10,18,26]}/>
+        {/* <ProductTable /> */}
       </div>
     </div>
   )

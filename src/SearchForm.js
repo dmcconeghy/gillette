@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+//The SearchForm component generates the search field and passes user inputted search terms to its parent using search(term). 
 
 //initalize the searchForm's empty state
 function SearchForm({ search }) {
