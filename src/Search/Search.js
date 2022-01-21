@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import ProductTable from "./ProductTable";
+import ProductTable from "../Products/ProductTable";
 import './Search.css'
 
 import SearchForm from "./SearchForm"

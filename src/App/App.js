@@ -1,8 +1,7 @@
 
 import './App.css';
-import Header from './Header'
-import ProductTable from './ProductTable';
-
+import Header from '../Header/Header'
+import Body from '../Body/Body';
 
 
 
@@ -12,7 +11,7 @@ return (
     <div className="App">
       <div className="Appwrapper">
         <Header />
-        {/* <ProductTable /> */}
+        <Body />
       </div>
     </div>
   )
