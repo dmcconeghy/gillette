@@ -1,11 +1,11 @@
 import '../styles/Logo.css'
 
-function Navbar() {
+function Logo() {
     return (
-        <div className="Navbar Header">
+        <div className="Logo">
             <h1>Retail Magic</h1>
         </div>
     )
 }
 
-export default Navbar
+export default Logo

@@ -1,12 +1,13 @@
 // import ProductTable from './ProductTable';
-import Search from '../Search/Search';
 import '../styles/Body.css'
+import Search from '../Search/Search';
+import Filter from '../Search/Filter';
 
 function Body () {
  return (
      <div className="BodyWrapper">
          <Search />
-     </div>
+        </div>   
  )
     
  
