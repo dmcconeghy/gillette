@@ -1,0 +1,8 @@
+.SearchField:focus {
+    border: 1px solid black;
+}
+
+
+input {
+   font-size: 20px;
+}
