@@ -1,6 +1,6 @@
 // import ProductTable from './ProductTable';
 import Search from '../Search/Search';
-import './Body.css'
+import '../styles/Body.css'
 
 function Body () {
  return (

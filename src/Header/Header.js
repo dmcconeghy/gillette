@@ -5,7 +5,7 @@ import SearchForm from '../Search/SearchForm'
 import Search from '../Search/Search'
 import Filter from '../Search/Filter';
 
-import './Header.css'
+import '../styles/Header.css'
 
 function Header() {
     return (

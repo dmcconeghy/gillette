@@ -10,8 +10,14 @@
     background-color: honeydew;
     padding: 10px;
     border-radius: 10px;
+    text-align: center;
 }
 
 button {
     align-items: flex-end;
+}
+
+.Category {
+    font-style: italic;
+    font-size: .8rem;
 }

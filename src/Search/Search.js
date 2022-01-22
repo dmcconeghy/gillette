@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"
 
-import ProductTable from "../Products/ProductTable";
-import './Search.css'
-
+import ProductTable from "../Products/ProductTable"
+import '../styles/Search.css'
 import SearchForm from "./SearchForm"
-import { parseResponseProductIds } from "./SearchHelpers";
+import { parseResponseProductIds } from "./SearchHelpers"
 
 //
 function Search() {
@@ -27,11 +26,11 @@ function Search() {
         
          setSearchResults(results);
         
+        
       }
       fetchProducts();
     }, [searchTerm]);
 
-    
  // Currently this returns the default 20 item ProductTable on initial rendering 
  // For now the search executes and returns inside the App > Body > Search
 

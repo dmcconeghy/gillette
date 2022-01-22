@@ -1,4 +1,4 @@
-// import './Filter.css'
+// import '../styles/Filter.css'
 import { parseResponseProductIds } from './SearchHelpers';
 import ProductTable from '../Products/ProductTable';
 
