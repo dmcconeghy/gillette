@@ -1,14 +1,23 @@
-// import '../styles/Filter.css'
+import '../styles/Filter.css'
+import { useContext } from 'react'
 import { parseResponseProductIds } from './SearchHelpers'
+import { SearchContext } from './SearchContext'
 
 function Filter(props){
 
-  // If the button is pressed, set the filtered category
+  const { searchTerm, 
+    setSearchTerm, 
+    searchResults, 
+    setSearchResults 
+  } = useContext(SearchContext)
+
+  // If the button is pressed, set the filtered category as the searchTerm
   async function handleClick(evt) {
     evt.preventDefault();
-    const results = await parseResponseProductIds(props.category)
-    console.log("Results of clicking",props.category, "are:", results)
-    return results
+    setSearchTerm(props.category)
+    setSearchResults( await parseResponseProductIds(searchTerm))
+
+    console.log("Results of clicking",props.category, "are:", searchResults)
   }
 
   return (
