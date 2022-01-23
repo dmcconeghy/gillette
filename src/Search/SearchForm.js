@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState } from "react"
+import '../styles/Header.css'
 
 //The SearchForm component generates the search field and passes user inputted search terms to its parent using search(term). 
 
@@ -19,11 +20,13 @@ function SearchForm({ search }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input value={term} onChange={handleChange} /> 
-      <button>Search!</button>
-    </form>
-  );
-};
+    <label className="SearchField">
+      <form onSubmit={handleSubmit}>
+        <input value={term} placeholder="Search..." onChange={handleChange} /> 
+        
+      </form>
+    </label>
+  )
+}
 
 export default SearchForm

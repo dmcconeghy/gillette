@@ -5,7 +5,11 @@ const BASE_URL = "https://fakestoreapi.com/products/";
 async function executeSearch(searchTerm = "") {
 
     //query the API for the json object 
-    const response = await axios.get(`${BASE_URL}`);
+    const response = await axios({
+        method: 'get',
+        url: `${BASE_URL}`,
+        withCredentials: false,
+    })
     
     //parse just the product item data
     const catalog = response.data
@@ -43,8 +47,13 @@ async function parseResponseProductIds(searchTerm) {
     }
 
     //a quick console check
-    console.log(productIdArray)
-    return productIdArray
+    console.log("The Helpers say your array is:", productIdArray)
+
+    //Prevents return of empty array, keeping current results on-screen
+    if (productIdArray.length === 0){
+        console.log("Search for", searchTerm, "returned no results")
+        return
+    } else return productIdArray
 }
 
 export {executeSearch, parseResponseProductIds}
