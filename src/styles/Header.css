@@ -14,3 +14,25 @@
     min-width: fit-content;
     float: right;
 }
+
+.Logo {
+    color: white;
+    min-width: 200px;
+}
+
+.SearchField:focus {
+    border: 1px solid black;
+}
+
+
+input {
+    font-size: 20px;
+    margin-right: 5px;
+   }
+
+.Search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
