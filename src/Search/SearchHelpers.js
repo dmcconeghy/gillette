@@ -12,7 +12,6 @@ async function executeSearch(searchTerm = "", category = null) {
 
     if (category !== null) {
         search_URL = (category_URL+category)
-        console.log(category)
 
         const categoryresponse = await axios({
             method: 'get',

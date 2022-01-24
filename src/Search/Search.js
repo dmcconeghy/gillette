@@ -14,7 +14,8 @@ function Search() {
   const { searchTerm, 
           searchResults,
           setSearchTerm, 
-          setSearchResults 
+          setSearchResults, 
+          setSelectedCategory
         } = useContext(SearchContext)
 
   // set the state of the inputted seach term (obtained from SearchForm)
@@ -29,16 +30,18 @@ function Search() {
       
       // We need to wait for executeSearch to make the api call for products.
        setSearchResults(await executeSearch(searchTerm));
+       // if we don't set the selectedCategory to be null, then the previously set category will be incorrectly used during sorting. 
+       setSelectedCategory(null)
       
     }
     fetchProducts();
-  }, [setSearchResults, searchTerm]);
+  }, [setSearchResults, searchTerm, setSelectedCategory]);
 
   return (
     <div className="Search"> 
       <SearchForm search = { search } />
-        {searchTerm ? console.log("Search component says you searched for", searchTerm) : null }
-        {searchResults ? console.log("Search component says your results are", searchResults) : null }
+        {/* {searchTerm ? console.log("Search component says you searched for", searchTerm) : null }
+        {searchResults ? console.log("Search component says your results are", searchResults) : null } */}
     </div>
   )
 }

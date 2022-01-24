@@ -4,5 +4,7 @@ export const SearchContext = createContext({
     searchTerm: "",
     setSearchTerm: () => {},
     searchResults: [],
-    setSearchResults: () => {}
+    setSearchResults: () => {},
+    selectedCategory: null,
+    setSelectedCategory: () => {}
   })

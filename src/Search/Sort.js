@@ -1,30 +1,32 @@
-import { useEffect, useState, useContext } from 'react';
+import { useContext } from 'react';
 import { executeSearch } from './SearchHelpers';
 import { SearchContext } from './SearchContext'
-import axios from 'axios'
 
-// This function doesn't do at all what it is supposed to right now. 
 
-function Sort(props) {
-    const { searchTerm,
-        setSearchTerm,
+// This function accepts an array of products and toggles their sorting ascending/descending.
+// It takes advantage of SearchContext to fetch and update the search results and supply the selected category.
+// Future feature: Add a useState to make the sort toggle. 
+function Sort() {
+    const {
+        searchTerm, 
+        selectedCategory,
         setSearchResults 
       } = useContext(SearchContext)
 
-    const [direction, setDirection ] = useState("")
     
-      async function handleClick(evt){
-        evt.preventDefault();
-        setDirection(props.direction)
-        setSearchTerm(props.direction)
-        console.log("Clicked the button", props.direction, direction)
-        setSearchResults(await executeSearch(searchTerm));
-      }
+    async function handleClick(evt) {
+        evt.preventDefault()
+        console.log("Sorting results")
+
+        setSearchResults((await executeSearch(searchTerm, selectedCategory)).sort((a,b) => (a.price > b.price) ? 1 : -1))
+    }
+    
 
 
   return (
     <div>
-        <button value={props.direction} onClick={handleClick}> Sort by Price({props.direction})</button>
+        Temporary
+        <button onClick={handleClick}>Sort by</button>
     </div>
     )
 }
