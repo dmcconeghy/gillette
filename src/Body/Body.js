@@ -14,19 +14,21 @@ function Body () {
     <div className="BodyWrapper">
         <div className="Sidebar">
         <div className="CategoryFilters">
-            <Category category= "Electronics" />
-            <Category category= "Jewelery" />
-            <Category category= "Men's Clothing" />
-            <Category category= "Women's Clothing" />
+            <p>Filter by category:</p>
+                <ul>
+                    <li><Category category= "Electronics" /></li>
+                    <li><Category category= "Jewelery" /></li>
+                    <li><Category category= "Men's Clothing" /></li>
+                    <li><Category category= "Women's Clothing" /></li>
+                    
+                </ul>
+            
         </div>
         <div> Price sort buttons </div>
             <Sort /> 
         </div>
 
         <div className="Content">
-            <div className='SearchFilters'>
-            
-            </div>
 
             <div className="ProductTable">
                 <ProductTable productsObject = { searchResults } /> 
