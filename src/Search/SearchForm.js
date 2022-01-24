@@ -22,7 +22,7 @@ function SearchForm({ search }) {
   return (
     <label className="SearchField">
       <form onSubmit={handleSubmit}>
-        <input value={term} placeholder="Search..." onChange={handleChange} /> 
+        <input type="search" value={term} placeholder="Search..." onChange={handleChange} /> 
         
       </form>
     </label>

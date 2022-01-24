@@ -17,13 +17,12 @@ function Filter(props){
     setSearchTerm(props.category)
     setSearchResults( await parseResponseProductIds(searchTerm))
 
-    console.log("Results of clicking",props.category, "are:", searchResults)
+    
   }
 
   return (
       <>
       <button value={props.category} onClick={handleClick}>{props.category}</button>
-      {/* <ProductTable productIdArray={categoryArray} /> */}
       </>
   );
 

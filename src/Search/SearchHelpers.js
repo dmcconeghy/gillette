@@ -27,6 +27,7 @@ async function executeSearch(searchTerm = "") {
 
 // The ProductTable component takes an array of IDs.
 // parseResponseProductIds() takes the product objects and returns an array with only the product IDs.
+// A future code refactor could return the product objects instead, reducing calls to the API.  
 
 async function parseResponseProductIds(searchTerm) {
 
@@ -45,9 +46,6 @@ async function parseResponseProductIds(searchTerm) {
     for (product in productObject){
          productIdArray.push(productObject[product].id);
     }
-
-    //a quick console check
-    console.log("The Helpers say your array is:", productIdArray)
 
     //Prevents return of empty array, keeping current results on-screen
     if (productIdArray.length === 0){
