@@ -6,10 +6,10 @@ Contact: david.mcconeghy@gmail.com
 ***
 
 ### **Project minimum requirements:**
-- Build a React app
-- Utilize the [Fake Store API](https://fakestoreapi.com/)
-- Display all products
-- Allow user to search through products
+- [x] Build a React app
+- [x] Utilize the [Fake Store API](https://fakestoreapi.com/)
+- [x] Display all products
+- [x] Allow user to search through products
 - Allow users to filter on product results
   - Price
   - Category
@@ -33,19 +33,31 @@ Contact: david.mcconeghy@gmail.com
 #### 1/21/22 - 1/22/22
   I had less time to work on the project on these days, but I continued to explore how useContext would be the solution to passing search results across components. 
 
-#### 1/23/22 - 1/24/22
-  I successfully implemented useContext, which meant rapid progress on the filters and sorting requirements. It wasn't enough to learn about useContext itself, though. I gained a much deeper understanding of useState and how to set variables through UI components (e.g, filter buttons and search fields). UseMemo was also key to reducing state changes for the global search context variable passing. 
+#### 1/23/22
+  I successfully implemented useContext, which meant rapid progress on the filters and sorting requirements. It wasn't enough to learn about useContext itself, though. I gained a much deeper understanding of useState and how to set variables through UI components (e.g, filter buttons and search fields). UseMemo was also key to reducing state changes for the global search context variable passing.
+
+  One weakness of my early design was returning an array product ids instead of an object with products. This meant additional API calls for each item. With searchResults being global, it became desirable to refactor the searchhelpers to implement this change, which also resulted in changes to the design of the product cards and their containing table. After refactoring the code is more flexible and less demanding of the API. 
+
+#### 1/24/22
+  After finishing the initial coding for sorting by price, I next turned to making category filters be multiple rather than singular and to implement the last feature of filtering by price. Returning items from a single category was straightforward, but I needed to revisit the searchContext and search component to merge/reduce multiple category results on the fly. 
+
 
 ### Bug & Refactor Tracking
 
-  - Search **bug** 
+  - Search **bugs** 
     - ~~"clothing" returns 0 items;~~ *Found a misplaced ) causing category and description not to be searched.* 
     -  Using multiple search terms fails if words not found in exactly that order/spacing.
+    -  Potentially unwanted substring search results men's clothing retuns women's clothing
   - UseState **bugs**
     - Searches are making un-needed calls // these are clearer with console.log in Search/SearchForm/Filter
   - SearchHelpers **refactor**
-    - Search helper takes the executeSearch and returns productIDs as an array.
-    - If executeSearch returned an array of product objects we could reduce API calls especially cf. useState bugs
-  - Categories **bug*
-    - Clicking "Men's Clothing" also returns "Women's Clothing"
+    - ~~~Search helper takes the executeSearch and returns productIDs as an array.~~~
+    - ~~~If executeSearch returned an array of product objects we could reduce API calls especially cf. useState bugs~~~
+  - Categories **bug** *Refactored category code to explicitly identify the categories and pass their value to the API's built in category route." 
+    - ~~~Clicking "Men's Clothing" also returns "Women's Clothing"~~~
+
+### Features Next to Implement
+  - Axios error handling. All API calls should be wrapped with try/catch. 
+  - Active search results. Presently terms are only passed on search form submission, not during search term entry.
+  - Sorting is currently one-way from default order by id to ascending order by price. Add a toggle feature to sort low-high and high-low.  
    
