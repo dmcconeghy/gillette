@@ -15,7 +15,7 @@ function Search() {
           // searchResults,
           setSearchTerm, 
           setSearchResults, 
-          setSelectedCategory
+          setSelectedCategories
         } = useContext(SearchContext)
 
   // set the state of the inputted seach term (obtained from SearchForm)
@@ -30,12 +30,12 @@ function Search() {
       
       // We need to wait for executeSearch to make the api call for products.
        setSearchResults(await executeSearch(searchTerm));
-       // if we don't set the selectedCategory to be null, then the previously set category will be incorrectly used during sorting. 
-       setSelectedCategory(null)
+       // if we don't set the selectedCategories to be null, then the previously set category will be incorrectly used during sorting. 
+       setSelectedCategories(null)
       
     }
     fetchProducts();
-  }, [setSearchResults, searchTerm, setSelectedCategory]);
+  }, [setSearchResults, searchTerm, setSelectedCategories]);
 
   return (
     <div className="Search"> 

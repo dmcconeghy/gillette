@@ -8,12 +8,12 @@ function App() {
 
   const [ searchTerm, setSearchTerm ] = useState("")
   const [ searchResults, setSearchResults ] = useState([])
-  const [ selectedCategory, setSelectedCategory ] = useState(null)
+  const [ selectedCategories, setSelectedCategories ] = useState(null)
 
-  //Memoizing these values means they're only updated on a change in searchTerm, selectedCategory, or searchReuslts
+  //Memoizing these values means they're only updated on a change in searchTerm, selectedCategories, or searchReuslts
   const searchValues = useMemo(
-    () => ({ searchTerm, setSearchTerm, searchResults, setSearchResults, selectedCategory, setSelectedCategory}),
-    [searchTerm, searchResults, selectedCategory]
+    () => ({ searchTerm, setSearchTerm, searchResults, setSearchResults, selectedCategories, setSelectedCategories}),
+    [searchTerm, searchResults, selectedCategories]
   );
   
 return (

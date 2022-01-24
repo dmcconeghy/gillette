@@ -9,7 +9,7 @@ import { SearchContext } from './SearchContext'
 function Sort() {
     const {
         searchTerm, 
-        selectedCategory,
+        selectedCategories,
         setSearchResults 
       } = useContext(SearchContext)
 
@@ -18,7 +18,7 @@ function Sort() {
         evt.preventDefault()
         console.log("Sorting results")
 
-        setSearchResults((await executeSearch(searchTerm, selectedCategory)).sort((a,b) => (a.price > b.price) ? 1 : -1))
+        setSearchResults((await executeSearch(searchTerm, selectedCategories)).sort((a,b) => (a.price > b.price) ? 1 : -1))
     }
     
 

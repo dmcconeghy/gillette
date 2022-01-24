@@ -6,7 +6,7 @@ import { SearchContext } from './SearchContext'
 function Category(props){
 
   const { 
-    setSelectedCategory 
+    setSelectedCategories 
   } = useContext(SearchContext)
 
   // This returns an array with all the categories as strings
@@ -131,7 +131,7 @@ export default Category
 //    let cleancategory = props.category.toLowerCase()
 
 //   // On a change in check status swap the status.
-//   // This function needs to return to setSelectedCategory an array of categories to be parsed into searchResults by searchHelpers
+//   // This function needs to return to setSelectedCategories an array of categories to be parsed into searchResults by searchHelpers
 //   async function handleOnChange() {
 //     setIsChecked(!isChecked)
 
@@ -141,7 +141,7 @@ export default Category
 //       cleancategory = ("women%27s%20clothing")
 //     } 
     
-//     setSelectedCategory(cleancategory)
+//     setSelectedCategories(cleancategory)
   
 //     setSearchResults( await executeSearch("", cleancategory))
 //   }
