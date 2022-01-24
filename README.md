@@ -42,18 +42,20 @@ Contact: david.mcconeghy@gmail.com
   After finishing the initial coding for sorting by price, I next turned to making category filters be multiple rather than singular and to implement the last feature of filtering by price. Returning items from a single category was straightforward, but I needed to revisit the searchContext and search component to merge/reduce multiple category results on the fly. 
 
 
-### Bug & Refactor Tracking
+### Bugs, Issues, & Refactor Tracking
 
   - Search **bugs** 
     - ~~"clothing" returns 0 items;~~ *Found a misplaced ) causing category and description not to be searched.* 
     -  Using multiple search terms fails if words not found in exactly that order/spacing.
     -  Potentially unwanted substring search results men's clothing retuns women's clothing
-  - UseState **bugs**
+  - UseState **issue**
     - I believe searches are making un-needed calls. These are clearer with console.log in Search lines 43-44 where we can see potentially unwanted data fetching due to the order of useState/useEffect calls. 
-  - SearchHelpers **refactor**
+  - SearchHelpers **refactor** 
+    - *Refactored searchHelpers (and product / productTables components) to use the API returned object rather than using productIDs and calling the API a second time*
     - ~~~Search helper takes the executeSearch and returns productIDs as an array.~~~
     - ~~~If executeSearch returned an array of product objects we could reduce API calls especially cf. useState bugs~~~
-  - Categories **bug** *Refactored category code to explicitly identify the categories and pass their value to the API's built in category route." 
+  - Categories **bug** 
+    - *Refactored category code to explicitly identify the categories and pass their value to the API's built in category route."* 
     - ~~~Clicking "Men's Clothing" also returns "Women's Clothing"~~~
 
 ### Features Next to Implement
