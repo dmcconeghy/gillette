@@ -13,7 +13,7 @@ Contact: david.mcconeghy@gmail.com
 - Allow users to filter on product results
   - Price
   - Category
-- Allow user to sort on product price
+- [x] Allow user to sort on product price
 
 ### **Project reach goals:**
 - Detailed product page
@@ -49,7 +49,7 @@ Contact: david.mcconeghy@gmail.com
     -  Using multiple search terms fails if words not found in exactly that order/spacing.
     -  Potentially unwanted substring search results men's clothing retuns women's clothing
   - UseState **bugs**
-    - Searches are making un-needed calls // these are clearer with console.log in Search/SearchForm/Filter
+    - I believe searches are making un-needed calls. These are clearer with console.log in Search lines 43-44 where we can see potentially unwanted data fetching due to the order of useState/useEffect calls. 
   - SearchHelpers **refactor**
     - ~~~Search helper takes the executeSearch and returns productIDs as an array.~~~
     - ~~~If executeSearch returned an array of product objects we could reduce API calls especially cf. useState bugs~~~
