@@ -12,7 +12,7 @@ function Search() {
   // Use the global SearchContext for these useState variables.
   // SearchResults is only here for data checking.
   const { searchTerm, 
-          searchResults,
+          // searchResults,
           setSearchTerm, 
           setSearchResults, 
           setSelectedCategory
