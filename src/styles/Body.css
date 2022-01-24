@@ -27,3 +27,8 @@
     width: 100%;
 
 }
+
+.CategoryFilters {
+    display: flex;
+    flex-direction: column;
+}
