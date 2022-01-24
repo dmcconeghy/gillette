@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "../styles/ProductCard.css"
+import "../styles/Products.css"
 import axios from "axios"
 
 function ProductCard({number = 1 }) {
@@ -26,11 +26,11 @@ function ProductCard({number = 1 }) {
         <div className="ProductCard">
             {product ? 
             (
-                <div className="Product">
+                <div className="Product grow">
                 
+                <p><img src={product.image} alt={product.description}></img></p>
                 <p>{trimTitle(`${product.title}`)}</p>
                 <p className="Category">{product.category}</p>
-                <p><img src={product.image} alt={product.description} height="50px"></img></p>
                 <p>${product.price}</p>
                 <button>Add to Cart</button>
                 

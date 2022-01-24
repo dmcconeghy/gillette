@@ -1,4 +1,4 @@
-import '../styles/ProductTable.css'
+import '../styles/Products.css'
 import ProductCard from './ProductCard'
 
 
