@@ -1,10 +1,8 @@
 import '../styles/App.css'
 import Header from '../Header/Header'
 import Body from '../Body/Body'
-import { useEffect, useState, useMemo } from 'react'
+import { useState, useMemo } from 'react'
 import { SearchContext } from '../Search/SearchContext'
-import Search from '../Search/Search'
-
 
 function App() {
 
