@@ -1,13 +1,13 @@
 import "../styles/Products.css"
 
-// This is a dumb component. 
+// ProductCard spreads product properties across. 
+// Further component reduction may be desirable for use in a future product description page.  
 // Ideally, the props? ternary would show loading if the API results were delayed. 
 
 function ProductCard(props) {
 
         function trimTitle(title){
             return title.substr(0, 20) + "..."
-            
         }
 
     return (

@@ -13,20 +13,19 @@ function Body () {
  return (
     <div className="BodyWrapper">
         <div className="Sidebar">
-            <div> Category filter box component</div>
-            <div> Price sort buttons </div>
-            <Sort direction="asc"/>
-            <Sort direction="desc"/>
+        <div className="CategoryFilters">
+            <Category category= "Electronics" />
+            <Category category= "Jewelery" />
+            <Category category= "Men's Clothing" />
+            <Category category= "Women's Clothing" />
+        </div>
+        <div> Price sort buttons </div>
+            <Sort /> 
         </div>
 
         <div className="Content">
             <div className='SearchFilters'>
-            <div className="Filters">
-                    <Category category= "Electronics" />
-                    <Category category= "Jewelery" />
-                    <Category category= "Men's Clothing" />
-                    <Category category= "Women's Clothing" />
-                </div>
+            
             </div>
 
             <div className="ProductTable">

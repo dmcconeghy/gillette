@@ -10,19 +10,13 @@ function App() {
 
   const [ searchTerm, setSearchTerm ] = useState("")
   const [ searchResults, setSearchResults ] = useState([])
+  const [ selectedCategory, setSelectedCategory ] = useState(null)
 
-  //Memoizing these values means they're only updated on a change in searchTerm or searchReuslts
+  //Memoizing these values means they're only updated on a change in searchTerm, selectedCategory, or searchReuslts
   const searchValues = useMemo(
-    () => ({ searchTerm, setSearchTerm, searchResults, setSearchResults}),
-    [searchTerm, searchResults]
+    () => ({ searchTerm, setSearchTerm, searchResults, setSearchResults, selectedCategory, setSelectedCategory}),
+    [searchTerm, searchResults, selectedCategory]
   );
-  
-  //This initializtion is only for testing, I think. 
-  // useEffect(function setSearchValues() {
-  //   setSearchTerm("test");
-  //   setSearchResults([1, 3, 5]);
-  // }, []) 
-    
   
 return (
     <div className="App">
