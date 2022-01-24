@@ -1,21 +1,19 @@
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 import "../styles/Products.css"
-import axios from "axios"
+// import axios from "axios"
 
-function ProductCard({number = 1 }) {
-    const [product, setProduct] = useState(null);
+function ProductCard(props) {
+    // const [product, setProduct] = useState(null);
 
-    let productData
+    // useEffect(() => {
+    //     async function loadProduct() {
+    //         productData = await axios.get(`https://fakestoreapi.com/products/${number}`).then(res=>res.data);
 
-    useEffect(() => {
-        async function loadProduct() {
-            productData = await axios.get(`https://fakestoreapi.com/products/${number}`).then(res=>res.data);
-
-            setProduct(productData)
+    //         setProduct(productData)
             
-        }
-        loadProduct();
-    }, [number])
+    //     }
+    //     loadProduct();
+    // }, [number])
         
         function trimTitle(title){
             return title.substr(0, 20) + "..."
@@ -24,14 +22,14 @@ function ProductCard({number = 1 }) {
 
     return (
         <div className="ProductCard">
-            {product ? 
+            {props ? 
             (
                 <div className="Product grow">
                 
-                <p><img src={product.image} alt={product.description}></img></p>
-                <p>{trimTitle(`${product.title}`)}</p>
-                <p className="Category">{product.category}</p>
-                <p>${product.price}</p>
+                <p><img src={props.image} alt={props.description}></img></p>
+                <p>{trimTitle(`${props.title}`)}</p>
+                <p className="Category">{props.category}</p>
+                <p>${props.price}</p>
                 <button>Add to Cart</button>
                 
         </div>

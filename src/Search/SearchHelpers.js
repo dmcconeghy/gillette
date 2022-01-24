@@ -17,10 +17,16 @@ async function executeSearch(searchTerm = "") {
     //This expression looks for our term in the catalog string
     // the i flag ignores case
     // the g flag returns all results, not just the first one
+    // This search has a major limitation since "men" returns "women" as well. 
     const searchExpression = new RegExp('.*' + searchTerm + '.*', 'gi')
   
     const filteredResponse = catalog.filter(item => searchExpression.test(item.title) || searchExpression.test(item.description) || searchExpression.test(item.category))
 
+    if (filteredResponse.length === 0){
+        console.log("Search for", searchTerm, "returned no results")
+    } else {
+        console.log("Search for", searchTerm, "returned", filteredResponse.length, "results")
+    }
     // returns an array of products 
     return filteredResponse
 }
@@ -37,7 +43,8 @@ async function parseResponseProductIds(searchTerm) {
     }
 
     const productObject = await executeSearch(searchTerm);
-
+    
+    console.log("**************", productObject)
     let productIdArray = [];
     
     // React's lint does not like undefined variables, even in for... in loops. 
@@ -47,11 +54,20 @@ async function parseResponseProductIds(searchTerm) {
          productIdArray.push(productObject[product].id);
     }
 
+    // let productArray = [];
+
+//     for (product in productObject){
+//         productArray.push(...productObject[product]);
+//    }
+
+//    console.log("**********************", productArray )
+
     //Prevents return of empty array, keeping current results on-screen
     if (productIdArray.length === 0){
-        console.log("Search for", searchTerm, "returned no results")
         return
-    } else return productIdArray
+    } else {
+        return productIdArray
+    }
 }
 
 export {executeSearch, parseResponseProductIds}

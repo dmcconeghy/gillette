@@ -1,7 +1,7 @@
 import '../styles/Header.css'
 import { useState, useEffect, useContext } from 'react'
 import SearchForm from './SearchForm'
-import { parseResponseProductIds } from './SearchHelpers'
+import { executeSearch, parseResponseProductIds } from './SearchHelpers'
 import { SearchContext } from './SearchContext'
 
 
@@ -30,7 +30,7 @@ function Search( ) {
       
       // We need to wait for the api call for a valid product arry with IDs meeting our search term
       //the parseResponseProductIds abstracts axios from this component into SearchHelpers.js 
-       setSearchResults(await parseResponseProductIds(searchTerm));
+       setSearchResults(await executeSearch(searchTerm));
       
     }
     fetchProducts();
