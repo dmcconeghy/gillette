@@ -12,18 +12,13 @@ function Body () {
 
  return (
     <div className="BodyWrapper">
+        
         <div className="Sidebar">
+
         <div className="CategoryFilters">
-            <p>Filter by category:</p>
-                <ul>
-                    <li><Category category= "Electronics" /></li>
-                    <li><Category category= "Jewelery" /></li>
-                    <li><Category category= "Men's Clothing" /></li>
-                    <li><Category category= "Women's Clothing" /></li>
-                    
-                </ul>
-            
+            <Category />
         </div>
+
         <div> Price sort buttons </div>
             <Sort /> 
         </div>
