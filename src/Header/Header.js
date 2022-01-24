@@ -7,8 +7,10 @@ import Search from '../Search/Search'
 function Header() {
     return (
     <header className="Header">
-        <Logo />
-        <Search />
+        <div className="Navigation">
+            <Logo />
+            <Search />
+        </div>
     </header>
     )
 }
