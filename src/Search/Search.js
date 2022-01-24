@@ -40,8 +40,9 @@ function Search() {
   return (
     <div className="Search"> 
       <SearchForm search = { search } />
-        {/* {searchTerm ? console.log("Search component says you searched for", searchTerm) : null }
-        {searchResults ? console.log("Search component says your results are", searchResults) : null } */}
+         {/* These two console.log show the search component rendering can be further refined to reduce state updates.
+         {searchTerm ? console.log("Search component says you searched for", searchTerm) : null }
+        {searchResults ? console.log("Search component says your results are", searchResults) : null }  */}
     </div>
   )
 }
