@@ -1,20 +1,10 @@
-// import { useState, useEffect } from "react";
 import "../styles/Products.css"
-// import axios from "axios"
+
+// This is a dumb component. 
+// Ideally, the props? ternary would show loading if the API results were delayed. 
 
 function ProductCard(props) {
-    // const [product, setProduct] = useState(null);
 
-    // useEffect(() => {
-    //     async function loadProduct() {
-    //         productData = await axios.get(`https://fakestoreapi.com/products/${number}`).then(res=>res.data);
-
-    //         setProduct(productData)
-            
-    //     }
-    //     loadProduct();
-    // }, [number])
-        
         function trimTitle(title){
             return title.substr(0, 20) + "..."
             
@@ -32,7 +22,7 @@ function ProductCard(props) {
                 <p>${props.price}</p>
                 <button>Add to Cart</button>
                 
-        </div>
+                </div>
             ) : 'Loading...'}
         </div>
                               
