@@ -13,10 +13,12 @@ function Search() {
   // SearchResults is only here for data checking.
   const { searchTerm,
           setSearchTerm,  
-          // searchResults, 
+          // searchResults,
           setSearchResults,
           selectedCategories, 
-          setSelectedCategories
+          //setSelectedCategories,
+          priceFilter, 
+          //setPriceFilter
         } = useContext(SearchContext)
 
   // set the state of the inputted seach term (obtained from SearchForm)
@@ -30,14 +32,14 @@ function Search() {
     async function fetchProducts() {
       
       // We need to wait for executeSearch to make the api call for products.
-       setSearchResults(await executeSearch(searchTerm, selectedCategories));
+       setSearchResults(await executeSearch(searchTerm, selectedCategories, priceFilter));
         
       
     }
     fetchProducts();
     //Adding dependency for selectedCategories has a major impact here worth investigating.
     // It's likely that for advanced searching we will need both searchTerm and selectedCategories preserved but not in useEffect on any search change. 
-  }, [setSearchResults, searchTerm, selectedCategories]);
+  }, [setSearchResults, searchTerm, selectedCategories, priceFilter]);
 
   return (
     <div className="Search"> 

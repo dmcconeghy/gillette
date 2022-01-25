@@ -4,12 +4,12 @@ const all_products_URL = "https://fakestoreapi.com/products/";
 const category_URL = "https://fakestoreapi.com/products/category/"
 
 // Searchhelpers is a key logic file for this project used by numerous components.  
-// It takes a searchTerm and/or array of categories and results results from the Fake Store API. 
+// It takes a searchTerm and/or array of categories and results results from the Fake Store API in variable "filteredResponse". 
 // Its logic looks first for category-alone requests (using the filter-by category buttons, say with all products displayed by default).
 // If no category is supplied it looks for a search term and uses a RegExp string search across product titles, descriptions and categories.
 // This file could be refactored further, e.g., separating the category url parser or the RegExp to add to its logic. 
 
-async function executeSearch(searchTerm = "", categories = []) {
+async function executeSearch(term = "", categories = [], price = [0, -1]) {
 
     if (categories === null){categories = []}
     let search_URL;
@@ -73,25 +73,38 @@ async function executeSearch(searchTerm = "", categories = []) {
         //parse just the product item data
         const catalog = searchresponse.data
         
-        if (searchTerm === "" && (categories === [] || categories === null)){
+        if (term === "" && (categories === [] || categories === null)){
             return catalog
         }
         //This expression looks for our term in the catalog string
         // the i flag ignores case
         // the g flag returns all results, not just the first one
         // This search has a notable limitation since substring "men" is returned when searching "women". 
-        const searchExpression = new RegExp('.*' + searchTerm + '.*', 'gi')
+        const searchExpression = new RegExp('.*' + term + '.*', 'gi')
       
         filteredResponse = catalog.filter(item => searchExpression.test(item.title) || searchExpression.test(item.description) || searchExpression.test(item.category))
     
         if (filteredResponse.length === 0){
-            console.log(`Search for "${searchTerm}" returned no results`)
+            console.log(`Search for "${term}" returned no results`)
         } else {
-            console.log(`Search for "${searchTerm}" returned ${filteredResponse.length} results`)
+            console.log(`Search for "${term}" returned ${filteredResponse.length} results`)
         }
         // returns an array of products 
        
     } 
+
+    if (price[1] !== -1){
+        
+        const pricedResults = filteredResponse.filter((product) => 
+            product.price >= price[0] && product.price <= price[1]
+        )
+
+        console.log(`Prices limited to between results between ${price[0]} and ${price[1]}`)
+
+        filteredResponse = pricedResults
+    }
+
+
 
     return filteredResponse
 }
