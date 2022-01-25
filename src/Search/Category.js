@@ -1,14 +1,29 @@
 import '../styles/Body.css'
-import { useContext, useEffect, useState, useMemo } from 'react'
+import { useContext, useEffect, useRef, useState, useMemo } from 'react'
 import { SearchContext } from './SearchContext'
 import { executeSearch } from './SearchHelpers'
 // import axios from 'axios'
 
+// Category uses an array of category names to return a subselection of all products with the given selected categories.
+// Its current implementation does NOT work concurrently with price filters or search terms, awaitng a refactoring of SearchHelpers. 
+// This component is rather buggy and generates several errors if its executeSearch is provided with either a priceFilter or sortAscending search variable. 
+// A rework of this component is likely required in conjuction with a refactoring of the logic in executeSearch found in SearchHelpers.  
 function Category(){
+
+  const firstUpdate = useRef(true);
+  useEffect(() => {
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+      return;
+    }
+   
+  });
 
   const {
     searchTerm, 
     setSelectedCategories,
+    sortAscending,
+    priceFilter,
     setSearchResults 
   } = useContext(SearchContext)
 
@@ -72,15 +87,17 @@ function Category(){
       }
       console.log("Categories selected:", namedCategories())
 
+      
       // This results in a category search using the filter buttons, say on the default products list. 
       setSearchResults(await executeSearch(searchTerm, namedCategories()));
       
       // If we want to include category filters on other searches, the namedCategories must be set in SearchContext
       setSelectedCategories(namedCategories())
 
+
     }
     fetchCategories();
-  }, [isChecked, categoriesArray, searchTerm, setSearchResults, setSelectedCategories])
+  }, [isChecked, categoriesArray, searchTerm, setSearchResults, setSelectedCategories, priceFilter, sortAscending])
 
  
   return (
