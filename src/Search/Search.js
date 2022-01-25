@@ -18,7 +18,9 @@ function Search() {
           selectedCategories, 
           //setSelectedCategories,
           priceFilter, 
-          //setPriceFilter
+          //setPriceFilter,
+          sortAscending,
+          //setSortAscending
         } = useContext(SearchContext)
 
   // set the state of the inputted seach term (obtained from SearchForm)
@@ -32,14 +34,16 @@ function Search() {
     async function fetchProducts() {
       
       // We need to wait for executeSearch to make the api call for products.
-       setSearchResults(await executeSearch(searchTerm, selectedCategories, priceFilter));
+       setSearchResults(await executeSearch(searchTerm, selectedCategories, priceFilter, sortAscending));
+      // It may be better to let SearchHelpers take the terms supplied from any calls made to it?
+      // This change means category searches appear for a moment before being overwritten by all products.
+      // setSearchResults(await executeSearch());
         
-      
     }
     fetchProducts();
     //Adding dependency for selectedCategories has a major impact here worth investigating.
     // It's likely that for advanced searching we will need both searchTerm and selectedCategories preserved but not in useEffect on any search change. 
-  }, [setSearchResults, searchTerm, selectedCategories, priceFilter]);
+  }, [setSearchResults, searchTerm, selectedCategories, priceFilter, sortAscending]);
 
   return (
     <div className="Search"> 
