@@ -1,5 +1,4 @@
 import { useContext, useEffect, useRef, useState } from 'react';
-// import { executeSearch } from './SearchHelpers';
 import { SearchContext } from './SearchContext'
 
 
@@ -24,12 +23,10 @@ function PriceSort(props) {
     const {
         searchResults,
         setSearchResults, 
-        // sortAscending,
-        setSortAscending 
       } = useContext(SearchContext)
 
       const [isSortedUp, setIsSortedUp] = useState(false)
-      const [currentResults, setCurrentResults] = useState([])
+      
 
 
       function handleClick(evt){
@@ -61,7 +58,7 @@ function PriceSort(props) {
           // Due to the useState bug in the app, results appear to be correctly sorted on the accidental re-renders. 
         }
         sortResults()
-      }, [isSortedUp, searchResults, setSearchResults, currentResults, setSortAscending, setCurrentResults])
+      }, [isSortedUp, searchResults, setSearchResults])
     
     
   return (
