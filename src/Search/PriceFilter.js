@@ -3,9 +3,13 @@ import { useState, useContext } from 'react'
 import { SearchContext } from './SearchContext';
 import { executeSearch } from './SearchHelpers'
 
+
+// PriceFilter currently executes on all products rather than the specific subset from a search term or categories. 
+// In part this is due to both variables NOT being included in the useContext here. 
+// Their inclusion results in several potentially app-breaking render bugs. 
 function PriceFilter() {
 
-    const { setSearchResults, sortAscending, setSortAscending } = useContext(SearchContext)
+    const { setSearchResults, sortAscending, setSortAscending, priceFilter, setPriceFilter } = useContext(SearchContext)
 
     const [min, setMin] = useState(0)
     const [max, setMax] = useState(0)
@@ -19,14 +23,15 @@ function PriceFilter() {
         console.log(priceLimits)
 
         setSortAscending(true)
-        setSearchResults(await executeSearch("", [], priceLimits, sortAscending))
+        setPriceFilter(priceLimits)
+        setSearchResults(await executeSearch("", [], priceFilter, sortAscending))
     }
     
     const handleMinMaxSubmit = async (evt) => {
         evt.preventDefault();
 
         setSearchResults(await executeSearch("", [], [min, max]))
-        console.log("This feature doesn't work yet")
+        
     }
 
     const handleMinChange = (evt) => {
