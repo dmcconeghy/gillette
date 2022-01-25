@@ -29,8 +29,8 @@ function Body () {
         </div>
         <div className="Content">
             <div>
-                <p>{`Your last search term was "${searchTerm}" and returned ${searchResults.length} results`}</p>
-                <p>{`Your selected categories are: ${selectedCategories}`}</p>
+                {/* <p>{`Your last search term was "${searchTerm}" and returned ${searchResults? searchResults.length : "no"} results`}</p>
+                <p>{`Your selected categories are: ${selectedCategories}`}</p> */}
             </div>
             <div className="ProductTable">
                 
