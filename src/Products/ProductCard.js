@@ -19,6 +19,7 @@ function ProductCard(props) {
                 <p><img src={props.image} alt={props.description}></img></p>
                 <p>{trimTitle(`${props.title}`)}</p>
                 <p className="Category">{props.category}</p>
+                <p>Rating: {props.rating.rate}({props.rating.count})</p>
                 <p>${props.price}</p>
                 <button>Add to Cart</button>
                 
