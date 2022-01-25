@@ -37,7 +37,7 @@ function Search() {
     }
     fetchProducts();
     //Adding dependency for selectedCategories has a major impact here worth investigating.
-  }, [setSearchResults, searchTerm, setSelectedCategories]);
+  }, [setSearchResults, searchTerm, selectedCategories, setSelectedCategories]);
 
   return (
     <div className="Search"> 
