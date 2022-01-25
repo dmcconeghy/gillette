@@ -99,7 +99,7 @@ function Category(){
                     checked={isChecked[index]}
                     onChange={() => handleOnChange(index)}
                   />
-                  <label htmlFor={categoryname}>{categoryname.toLocaleUpperCase()}</label>
+                  <label htmlFor={categoryname}>{categoryname[0].toUpperCase() + categoryname.substring(1)}</label>
                 </div>
                 
               </li>
