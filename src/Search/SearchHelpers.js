@@ -11,7 +11,7 @@ const category_URL = "https://fakestoreapi.com/products/category/"
 
 async function executeSearch(searchTerm = "", categories = []) {
 
-    if (categories === null){ categories = []}
+    if (categories === null){categories = []}
     let search_URL;
     let filteredResponse; 
 
@@ -44,10 +44,10 @@ async function executeSearch(searchTerm = "", categories = []) {
             url: `${search_URL}`,
             withCredentials: false,
         })
-        console.log(categoryresponse.data)
         return categoryresponse.data
     }
 
+    // This should be refcatored to reduce calls? It appears through the console to be requesting the data twice. 
     async function aggregateData (categoryArray){
         let data = []
         for (let i=0; i<categoryArray.length; i++){
@@ -59,9 +59,6 @@ async function executeSearch(searchTerm = "", categories = []) {
     }
         
     filteredResponse = aggregateData(parsedCategories)
-        
-        
-        // filteredResponse = categoryresponse.data
 
     } else {
         console.log("All product results incoming...")
@@ -76,7 +73,7 @@ async function executeSearch(searchTerm = "", categories = []) {
         //parse just the product item data
         const catalog = searchresponse.data
         
-        if (searchTerm === ""){
+        if (searchTerm === "" && (categories === [] || categories === null)){
             return catalog
         }
         //This expression looks for our term in the catalog string
@@ -88,9 +85,9 @@ async function executeSearch(searchTerm = "", categories = []) {
         filteredResponse = catalog.filter(item => searchExpression.test(item.title) || searchExpression.test(item.description) || searchExpression.test(item.category))
     
         if (filteredResponse.length === 0){
-            console.log("Search for", searchTerm, "returned no results")
+            console.log(`Search for "${searchTerm}" returned no results`)
         } else {
-            console.log("Search for >>", searchTerm, "<< returned", filteredResponse.length, "results")
+            console.log(`Search for "${searchTerm}" returned ${filteredResponse.length} results`)
         }
         // returns an array of products 
        

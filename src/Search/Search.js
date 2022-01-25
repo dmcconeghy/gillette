@@ -31,13 +31,13 @@ function Search() {
       
       // We need to wait for executeSearch to make the api call for products.
        setSearchResults(await executeSearch(searchTerm, selectedCategories));
-       // if we don't set the selectedCategories to be [], then the previously set category will be incorrectly used during sorting. 
-      setSelectedCategories(null)
+        
       
     }
     fetchProducts();
     //Adding dependency for selectedCategories has a major impact here worth investigating.
-  }, [setSearchResults, searchTerm, selectedCategories, setSelectedCategories]);
+    // It's likely that for advanced searching we will need both searchTerm and selectedCategories preserved but not in useEffect on any search change. 
+  }, [setSearchResults, searchTerm, selectedCategories]);
 
   return (
     <div className="Search"> 
