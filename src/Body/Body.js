@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import { SearchContext } from '../Search/SearchContext'
 import ProductTable from '../Products/ProductTable'
 import Category from '../Search/Category'
-import Sort from '../Search/Sort'
+import PriceSort from '../Search/PriceSort'
 import PriceFilter from '../Search/PriceFilter'
 
 
@@ -20,8 +20,11 @@ function Body () {
         <div className="Sidebar">
 
             <Category />
+            
             <PriceFilter />
-            <Sort />
+
+            <PriceSort />
+            
 
         </div>
         <div className="Content">

@@ -12,6 +12,8 @@
     position: fixed;
     height: 1000px;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .Content {
@@ -46,7 +48,7 @@
 
 .CategoryFilters label {
     padding-left: 6px;
-    font-size: 14px;
+    font-size: 16px;
 } 
 
 .CategoryFilters [type="checkbox"] {
@@ -54,12 +56,20 @@
     height: 15px;
 }
 
+.PriceFilter {
+    display: flex;
+    flex-direction: column;
+}
+.PriceFilter p {
+    text-align: left;
+}
 .PriceFilter ul {
     list-style-type: none;
     float: left;
-    margin-left: 15px;
+    text-align: left;
+    margin-left: 10px;
+    margin-top:0px;
 }
-
 
 
 .PriceFilter button {
@@ -76,4 +86,22 @@
 .PriceFilter li:hover {
     color:orangered;
     transform: scale(1.05);
+}
+
+
+.PriceMinMax input {
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    padding: 3px 7px;
+
+}
+
+.PriceMinMax button {
+    height: 30px;
+    
+}
+
+.PriceSort {
+    margin-top: 25px;
 }
