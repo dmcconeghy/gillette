@@ -3,25 +3,60 @@ import axios from "axios";
 const all_products_URL = "https://fakestoreapi.com/products/";
 const category_URL = "https://fakestoreapi.com/products/category/"
 
-
-// We're passing a searchTerm here, but this function could make use of SearchContext instead. 
-async function executeSearch(searchTerm = "", category = null) {
+// 
+//
+async function executeSearch(searchTerm = "", categories = null) {
 
     let search_URL;
     let filteredResponse; 
 
-    if (category !== null) {
-        search_URL = (category_URL+category)
+    // If categories isn't null then we may be dealing with a category filter request
+    // Categories are passed as an array of strings that must be correctly parsed for API URL
+    if (categories.length > 0) {
 
+        const parsedCategories = categories.map((category) => {
+                if (category === "men's clothing"){
+                     category = "men%27s%20clothing"
+                } 
+                
+                if (category === "women's clothing"){
+                    category= "women%27s%20clothing"
+                } 
+                
+                return category
+            })
+    
+    // Now we need to generate search results for each category in the array. 
+    // We'll fetch results with getData, iterate over the categories, and then concat the responses to a single searchResults array. 
+
+    async function getData (category) {
+        search_URL = (category_URL+`${category}`)
         const categoryresponse = await axios({
             method: 'get',
             url: `${search_URL}`,
             withCredentials: false,
         })
+        console.log(categoryresponse.data)
+        return categoryresponse.data
+    }
+
+    async function aggregateData (categoryArray){
+        let data = []
+        for (let i=0; i<categoryArray.length; i++){
+            search_URL= (category_URL+`${categoryArray[i]}`)
+            data = data.concat(await getData(categoryArray[i]))
+        }
+
+        return data
+    }
         
-        filteredResponse = categoryresponse.data
+    filteredResponse = aggregateData(parsedCategories)
+        
+        
+        // filteredResponse = categoryresponse.data
 
     } else {
+        console.log("All product results incoming...")
         search_URL = all_products_URL
 
         const searchresponse = await axios({
@@ -47,7 +82,7 @@ async function executeSearch(searchTerm = "", category = null) {
         if (filteredResponse.length === 0){
             console.log("Search for", searchTerm, "returned no results")
         } else {
-            console.log("Search for", searchTerm, "returned", filteredResponse.length, "results")
+            console.log("Search for >>", searchTerm, "<< returned", filteredResponse.length, "results")
         }
         // returns an array of products 
        

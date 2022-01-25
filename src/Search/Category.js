@@ -1,12 +1,15 @@
 import '../styles/Body.css'
 import { useContext, useEffect, useState, useMemo } from 'react'
 import { SearchContext } from './SearchContext'
+import { executeSearch } from './SearchHelpers'
 // import axios from 'axios'
 
-function Category(props){
+function Category(){
 
-  const { 
-    setSelectedCategories 
+  const {
+    selectedCategories, 
+    setSelectedCategories,
+    setSearchResults 
   } = useContext(SearchContext)
 
   // This returns an array with all the categories as strings
@@ -28,28 +31,31 @@ function Category(props){
       "women's clothing"
     ]}, [])
   
-  
   //the categories checkboxes start as unchecked/false
   const [isChecked, setIsChecked] = useState(
     new Array(categoriesArray.length).fill(false)
   )
 
-  const [checkedCategories, setCheckedCategories] = useState([])
+  //A potential refactor could merge categoriesArray and their checked states into a single array like so:
+  // const [isChecked, setIsChecked] = useState(
+  //   [{"electronics": false}, {"jewelery": false}, {"men's clothing": false}, {"women's clothing": false}]
+  // )
+  
+  const handleOnChange = (categoryindex) => {
 
-  function handleOnChange (categoryindex) {
-
-    const updatedCheckedState = isChecked.map(
+    //update the array of select box states
+    const updateCheckedState = isChecked.map(
       (check, index) => (index === categoryindex) ? !check : check
     )
-
     // This is necessary to create a controlled input.
-    setIsChecked(updatedCheckedState);
+    setIsChecked(updateCheckedState)
   }
 
   useEffect(function fetchOnChange() {
-    function fetchCategories() {
-      
-      function checkedTrueToCategoryName() {
+    async function fetchCategories() {
+
+       //when called it looks at isChecked and maps checked items into namedCategories
+       const namedCategories = function convertCheckStateToNames() {
         let temp = []
         for(let i=0; i<categoriesArray.length; i++){
           if (isChecked[i] === true) {
@@ -58,19 +64,19 @@ function Category(props){
         }
         return temp
       }
-        
-      const selectedCategories = checkedTrueToCategoryName()
-    
-      setCheckedCategories(selectedCategories)
+      console.log("Categories selected:", namedCategories())
+
+      // This results in a category search using the filter buttons, say on the default products list. 
+      setSearchResults(await executeSearch("", namedCategories()));
       
+      // If we want to include category filters on other searches, the namedCategories must be set in SearchContext
+      setSelectedCategories(namedCategories())
+
     }
     fetchCategories();
-  }, [categoriesArray, isChecked])
+  }, [isChecked, categoriesArray, setSearchResults, setSelectedCategories])
 
-  console.log("Categories selected:", checkedCategories)
-  console.log("Boxes checked:", isChecked)
  
-
   return (
     <div className="CategoryFilters">
         <p>Filter by category:</p>
@@ -87,8 +93,9 @@ function Category(props){
                     checked={isChecked[index]}
                     onChange={() => handleOnChange(index)}
                   />
+                  <label htmlFor={categoryname}>{categoryname.toLocaleUpperCase()}</label>
                 </div>
-                <label htmlFor={categoryname}>{categoryname}</label>
+                
               </li>
             )
           })
@@ -99,49 +106,4 @@ function Category(props){
 
 }
 
-
 export default Category
-
-
-// {console.log((isChecked ? (`${props.category} is checked`) : (`${props.category} is unchecked`)))} 
-
-//         <ul>
-//             <li>
-//               <input type="checkbox" checked={isChecked[index]} onChange={handleOnChange} id="Electronics" name="Electronics" value="Electronics"/>
-//               <label htmlFor="Electronics" id="categorycheckboxlabel">Electronics</label>
-//             </li>
-            
-//             <li>
-//               <input type="checkbox" checked={isChecked} onChange={handleOnChange} id="Jewelery" name="Jewelery" value="Jewelery"/>
-//               <label htmlFor="Jewelery" id="categorycheckboxlabel">Jewelery</label>
-//             </li>
-//             <li>
-//               <input type="checkbox" checked={isChecked} onChange={handleOnChange} id="Men's Clothing" name="Men's Clothing" value="Men's Clothing"/>
-//               <label htmlFor="Men's Clothing" id="categorycheckboxlabel">Men's Clothing</label>
-//             </li>
-//             <li>
-//               <input type="checkbox" checked={isChecked} onChange={handleOnChange} id="Women's Clothing" name="Women's Clothing" value="Women's Clothing"/>
-//               <label htmlFor="Women's Clothing" id="categorycheckboxlabel">Women's Clothing</label>
-//             </li>
-            
-//         </ul> 
-
-
-//   // the props.category need to be cleaned up for use in the API URL
-//    let cleancategory = props.category.toLowerCase()
-
-//   // On a change in check status swap the status.
-//   // This function needs to return to setSelectedCategories an array of categories to be parsed into searchResults by searchHelpers
-//   async function handleOnChange() {
-//     setIsChecked(!isChecked)
-
-//     if (cleancategory === "men's clothing"){
-//       cleancategory = ("men%27s%20clothing") 
-//     } else if (cleancategory === "women's clothing"){
-//       cleancategory = ("women%27s%20clothing")
-//     } 
-    
-//     setSelectedCategories(cleancategory)
-  
-//     setSearchResults( await executeSearch("", cleancategory))
-//   }

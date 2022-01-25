@@ -11,10 +11,11 @@ function Search() {
 
   // Use the global SearchContext for these useState variables.
   // SearchResults is only here for data checking.
-  const { searchTerm, 
-          // searchResults,
-          setSearchTerm, 
-          setSearchResults, 
+  const { searchTerm,
+          setSearchTerm,  
+          // searchResults, 
+          setSearchResults,
+          selectedCategories, 
           setSelectedCategories
         } = useContext(SearchContext)
 
@@ -29,12 +30,13 @@ function Search() {
     async function fetchProducts() {
       
       // We need to wait for executeSearch to make the api call for products.
-       setSearchResults(await executeSearch(searchTerm));
-       // if we don't set the selectedCategories to be null, then the previously set category will be incorrectly used during sorting. 
-       setSelectedCategories(null)
+       setSearchResults(await executeSearch(searchTerm, selectedCategories));
+       // if we don't set the selectedCategories to be [], then the previously set category will be incorrectly used during sorting. 
+      setSelectedCategories(null)
       
     }
     fetchProducts();
+    //Adding dependency for selectedCategories has a major impact here worth investigating.
   }, [setSearchResults, searchTerm, setSelectedCategories]);
 
   return (
