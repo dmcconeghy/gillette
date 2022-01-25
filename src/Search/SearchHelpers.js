@@ -13,7 +13,7 @@ const category_URL = "https://fakestoreapi.com/products/category/"
 
 async function executeSearch(term = "", categories = [], price = [0, -1], ascending) {
 
-    if (categories === null){categories = []}
+    // if (categories === null){categories = []}
     let search_URL;
     let filteredResponse; 
 
@@ -22,7 +22,7 @@ async function executeSearch(term = "", categories = [], price = [0, -1], ascend
     // This logic currently assumes that if we're using categories we do not have a search. 
     // This is presently obstructing filtering within search results, since the searchTerm needs to be passed to the filter and retained until it is set again elsewhere.
     // Search.js hoists searchTerm into the searchContext, so a code review will be needed to find places where that variable may be being altered uneccessarily. 
-    if (categories.length > 0) {
+    if (categories !== null && categories.length > 0) {
 
         const parsedCategories = categories.map((category) => {
                 if (category === "men's clothing"){
@@ -66,6 +66,9 @@ async function executeSearch(term = "", categories = [], price = [0, -1], ascend
 
     // returns an array of products 
     } else {
+        //Keeping this line in the console.log reveals how executeSearch is not handling componentmounting/updating in an ideal way. 
+        // Searches result in brief pops of different searchResults, say between an original product array arriving and then being sorted. 
+        // These problems are most acute in relation to the Category component and its related search functions here in the logic above. 
         console.log("All product results incoming...")
         search_URL = all_products_URL
 

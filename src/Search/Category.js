@@ -85,7 +85,8 @@ function Category(){
         }
         return temp
       }
-      console.log("Categories selected:", namedCategories())
+      //This console line reveals Category often fires with [] resulting in unwanted re-renders. 
+      // console.log("Categories selected:", namedCategories())
 
       
       // This results in a category search using the filter buttons, say on the default products list. 
