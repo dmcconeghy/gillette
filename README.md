@@ -39,7 +39,7 @@ Contact: david.mcconeghy@gmail.com
   One weakness of my early design was returning an array product ids instead of an object with products. This meant additional API calls for each item. With searchResults being global, it became desirable to refactor the searchhelpers to implement this change, which also resulted in changes to the design of the product cards and their containing table. After refactoring the code is more flexible and less demanding of the API. 
 
 #### 1/24/22
-  After finishing the initial coding for sorting by price, I next turned to making category filters be multiple rather than singular and to implement the last feature of filtering by price. Returning items from a single category was straightforward, but I needed to revisit the searchContext and search component to merge/reduce multiple category results on the fly. 
+  After finishing the initial coding for sorting by price, I next turned to making category filters be multiple rather than singular and to implement the last feature of filtering by price. Returning items from a single category was straightforward, but I needed to revisit the searchContext and search component to merge/reduce multiple category results on the fly. It was quite challenging making category filters and I had to make use of what I had already learned about useState, useEffect, and useContext from creating the search feature. Very rewarding to see it work and it was fun to code. The challenge continued, however, as selecting filters was a step behind, and using filters after search results returned the full category rather than the search results category subset. It was gratifying to finally get useState and useEffect to work properly and to see the sort correctly append categories of products together which could then be sorted. In the end I realized that the design of my Category filters was a blend of two approaches: a) a select-box based category filter for search results and b) a category search button. I will return to this tomorrow to see if I can implement a fix. 
 
 
 ### Bugs, Issues, & Refactor Tracking
@@ -57,9 +57,14 @@ Contact: david.mcconeghy@gmail.com
   - Categories **bug** 
     - *Refactored category code to explicitly identify the categories and pass their value to the API's built in category route."* 
     - ~~~Clicking "Men's Clothing" also returns "Women's Clothing"~~~
+    - ~~~I'm incorrectly implementing useState/useEffect and the select boxes are returning on second click the first click's results. Sorting by price correctly identifies the currently checked boxes.~~~ *Fixed by correctly alinging useState and useContext variables* 
+  - Sorting **bugs** **issues**
+    - *issue* Sorting is currently one-way from default order by id to ascending order by price. Add a toggle feature to sort low-high and high-low.  
+    - *issue* Searching all products returns results from multiple categories. If a category filter is then selected, the results returned are all products from the category rather than the subset of items in that category from the search results. *A fix will require tweaks to SearchHelper's logic by checking for empty or in useContext searchTerms and then sustaining them during the filter/sorting.* 
+    - *bug* ~~~Filtering to no items (all > electronics(on) > electonics(off)) should return all products again.~~~ *Fixed by changing SearchHelpers logic to only show category filters if categoryArray > 0 rather than if it was null because an empty category array isn't null (though both are falsy)*  
 
-### Features Next to Implement
+### Features to Implement
   - Axios error handling. All API calls should be wrapped with try/catch. 
   - Active search results. Presently terms are only passed on search form submission, not during search term entry.
-  - Sorting is currently one-way from default order by id to ascending order by price. Add a toggle feature to sort low-high and high-low.  
+  - 
    
