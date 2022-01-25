@@ -10,11 +10,16 @@ function App() {
   const [ searchResults, setSearchResults ] = useState([])
   const [ selectedCategories, setSelectedCategories ] = useState(null)
   const [ priceFilter, setPriceFilter ] = useState([0, -1])
+  const [ sortAscending, setSortAscending ] = useState(null)
 
   //Memoizing these values should mean they're only updated on a change in searchTerm, selectedCategories, or searchReuslts
   const searchValues = useMemo(
-    () => ({ searchTerm, setSearchTerm, searchResults, setSearchResults, selectedCategories, setSelectedCategories, priceFilter, setPriceFilter}),
-    [searchTerm, searchResults, selectedCategories, priceFilter]
+    () => ({  searchTerm, setSearchTerm, 
+              searchResults, setSearchResults, 
+              selectedCategories, setSelectedCategories, 
+              priceFilter, setPriceFilter,
+              sortAscending, setSortAscending}),
+    [searchTerm, searchResults, selectedCategories, priceFilter, sortAscending]
   );
   
 return (
