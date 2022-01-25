@@ -10,7 +10,7 @@ Contact: david.mcconeghy@gmail.com
 - [x] Utilize the [Fake Store API](https://fakestoreapi.com/)
 - [x] Display all products
 - [x] Allow user to search through products
-- Allow users to filter on product results
+- [x] Allow users to filter on product results
   - Price
   - Category
 - [x] Allow user to sort on product price
@@ -41,6 +41,9 @@ Contact: david.mcconeghy@gmail.com
 #### 1/24/22
   After finishing the initial coding for sorting by price, I next turned to making category filters be multiple rather than singular and to implement the last feature of filtering by price. Returning items from a single category was straightforward, but I needed to revisit the searchContext and search component to merge/reduce multiple category results on the fly. It was quite challenging making category filters and I had to make use of what I had already learned about useState, useEffect, and useContext from creating the search feature. Very rewarding to see it work and it was fun to code. The challenge continued, however, as selecting filters was a step behind, and using filters after search results returned the full category rather than the search results category subset. It was gratifying to finally get useState and useEffect to work properly and to see the sort correctly append categories of products together which could then be sorted. In the end I realized that the design of my Category filters was a blend of two approaches: a) a select-box based category filter for search results and b) a category search button. I will return to this tomorrow to see if I can implement a fix. 
 
+#### 1/25/22
+  I wrapped up and commited the implementation of price filtering. Filtering within search results and sorting by price are still not working as intended. Partially a design feature, the calling of exectuteSearch by different components is often overriding earlier results rather than accumulating a more intensive list of filters. 
+
 
 ### Bugs, Issues, & Refactor Tracking
 
@@ -49,7 +52,7 @@ Contact: david.mcconeghy@gmail.com
     -  Using multiple search terms fails if words not found in exactly that order/spacing.
     -  Potentially unwanted substring search results men's clothing retuns women's clothing
   - UseState **issue**
-    - I believe searches are making un-needed calls. These are clearer with console.log in Search lines 43-44 where we can see potentially unwanted data fetching due to the order of useState/useEffect calls. 
+    - I believe searches are making un-needed calls. These are clearer with console.log in Search lines 43-44 where we can see potentially unwanted data fetching due to the order of useState/useEffect calls. Also visible during searches with products swapping places rapidly before final render?
   - SearchHelpers **refactor** 
     - *Refactored searchHelpers (and product / productTables components) to use the API returned object rather than using productIDs and calling the API a second time*
     - ~~~Search helper takes the executeSearch and returns productIDs as an array.~~~
