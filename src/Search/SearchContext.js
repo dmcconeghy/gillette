@@ -12,6 +12,8 @@ export const SearchContext = createContext()
 //   selectedCategories: null,
 //   setSelectedCategories: () => {},
 //   priceFilter: [0, -1],
-//   setPriceFilter: () => {}
+//   setPriceFilter: () => {},
+//   sortAscending: null,
+//   setSortAscending: () => {}
 
 // }
