@@ -3,15 +3,23 @@ import axios from "axios";
 const all_products_URL = "https://fakestoreapi.com/products/";
 const category_URL = "https://fakestoreapi.com/products/category/"
 
-// 
-//
-async function executeSearch(searchTerm = "", categories = null) {
+// Searchhelpers is a key logic file for this project used by numerous components.  
+// It takes a searchTerm and/or array of categories and results results from the Fake Store API. 
+// Its logic looks first for category-alone requests (using the filter-by category buttons, say with all products displayed by default).
+// If no category is supplied it looks for a search term and uses a RegExp string search across product titles, descriptions and categories.
+// This file could be refactored further, e.g., separating the category url parser or the RegExp to add to its logic. 
 
+async function executeSearch(searchTerm = "", categories = []) {
+
+    if (categories === null){ categories = []}
     let search_URL;
     let filteredResponse; 
 
     // If categories isn't null then we may be dealing with a category filter request
-    // Categories are passed as an array of strings that must be correctly parsed for API URL
+    // Categories are passed as an array of strings that must be correctly parsed for API URL.
+    // This logic currently assumes that if we're using categories we do not have a search. 
+    // This is presently obstructing filtering within search results, since the searchTerm needs to be passed to the filter and retained until it is set again elsewhere.
+    // Search.js hoists searchTerm into the searchContext, so a code review will be needed to find places where that variable may be being altered uneccessarily. 
     if (categories.length > 0) {
 
         const parsedCategories = categories.map((category) => {

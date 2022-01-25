@@ -7,12 +7,18 @@ import { executeSearch } from './SearchHelpers'
 function Category(){
 
   const {
-    selectedCategories, 
+    searchTerm, 
     setSelectedCategories,
     setSearchResults 
   } = useContext(SearchContext)
 
   // This returns an array with all the categories as strings
+  // With a dynamic or larger db we would need to call the API to confirm the categories before adding them to the app. 
+  // For simplicitly the Fake Store API's four categories have been memoized below, 
+  // but SearchHelpers does use the API to generate category specific calls.
+  // A potential refactor might include adding a useContext for categories to be used here,
+  // in the search functions, and future features like product descriptions or breadcrumbs.
+  //   
   // const categoriesArray = async function getCategories() {
   //   return ( 
   //     await axios({
@@ -67,14 +73,14 @@ function Category(){
       console.log("Categories selected:", namedCategories())
 
       // This results in a category search using the filter buttons, say on the default products list. 
-      setSearchResults(await executeSearch("", namedCategories()));
+      setSearchResults(await executeSearch(searchTerm, namedCategories()));
       
       // If we want to include category filters on other searches, the namedCategories must be set in SearchContext
       setSelectedCategories(namedCategories())
 
     }
     fetchCategories();
-  }, [isChecked, categoriesArray, setSearchResults, setSelectedCategories])
+  }, [isChecked, categoriesArray, searchTerm, setSearchResults, setSelectedCategories])
 
  
   return (
