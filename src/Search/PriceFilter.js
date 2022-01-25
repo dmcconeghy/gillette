@@ -5,7 +5,7 @@ import { executeSearch } from './SearchHelpers'
 
 function PriceFilter() {
 
-    const { searchResults, setSearchResults } = useContext(SearchContext)
+    const { setSearchResults, sortAscending, setSortAscending } = useContext(SearchContext)
 
     const [min, setMin] = useState(0)
     const [max, setMax] = useState(0)
@@ -18,14 +18,15 @@ function PriceFilter() {
         const priceLimits = (evt.target.value).split('-')
         console.log(priceLimits)
 
-        setSearchResults(await executeSearch("", [], priceLimits))
+        setSortAscending(true)
+        setSearchResults(await executeSearch("", [], priceLimits, sortAscending))
     }
     
     const handleMinMaxSubmit = async (evt) => {
         evt.preventDefault();
 
         setSearchResults(await executeSearch("", [], [min, max]))
-        console.log("do nothing", evt.target.value)
+        console.log("This feature doesn't work yet")
     }
 
     const handleMinChange = (evt) => {
