@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from 'react';
-import { executeSearch } from './SearchHelpers';
+// import { executeSearch } from './SearchHelpers';
 import { SearchContext } from './SearchContext'
 
 
@@ -24,7 +24,7 @@ function PriceSort(props) {
     const {
         searchResults,
         setSearchResults, 
-        sortAscending,
+        // sortAscending,
         setSortAscending 
       } = useContext(SearchContext)
 
@@ -63,9 +63,6 @@ function PriceSort(props) {
         sortResults()
       }, [isSortedUp, searchResults, setSearchResults, currentResults, setSortAscending, setCurrentResults])
     
-    
-
-      
     
   return (
     <div className="PriceSort">
