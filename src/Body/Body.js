@@ -9,7 +9,11 @@ import PriceFilter from '../Search/PriceFilter'
 
 function Body () {
 
-    const { searchTerm, searchResults, selectedCategories }  = useContext(SearchContext)
+    const { 
+        // searchTerm, 
+        searchResults, 
+        // selectedCategories 
+    }  = useContext(SearchContext)
 
     // An early attempt to make a simple but dynamic search/category alert revealed a more challenging logic function was required. 
     // The included lines 28-31 are only for testing. 
@@ -44,4 +48,3 @@ function Body () {
 }
 
 export default Body
-

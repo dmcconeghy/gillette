@@ -7,9 +7,11 @@ const category_URL = "https://fakestoreapi.com/products/category/"
 // It takes a searchTerm and/or array of categories and results results from the Fake Store API in variable "filteredResponse". 
 // Its logic looks first for category-alone requests (using the filter-by category buttons, say with all products displayed by default).
 // If no category is supplied it looks for a search term and uses a RegExp string search across product titles, descriptions and categories.
-// This file could be refactored further, e.g., separating the category url parser or the RegExp to add to its logic. 
+// An initial refactor of this file failed, causing numerous bugs that would have pushed product delivery out, but which retain several known bugs.  
+// For a refactor it would be helpful to split the logic across the variables and handle each in turn.
+// In this way you could separating and resuse the category url parser or add to the RegExp logic to search multple words or use more advance search operands. 
 
-async function executeSearch(term = "", categories = [], price = [0, -1]) {
+async function executeSearch(term = "", categories = [], price = [0, -1], ascending) {
 
     if (categories === null){categories = []}
     let search_URL;
@@ -47,7 +49,9 @@ async function executeSearch(term = "", categories = [], price = [0, -1]) {
         return categoryresponse.data
     }
 
-    // This should be refcatored to reduce calls? It appears through the console to be requesting the data twice. 
+    // This should be refcatored to reduce calls. One solution would be to call allProducts once and memoize it. 
+    // Then future searches could either use it as the default or turn it into subsets for search/category/price requests. 
+    // It appears through the console to be requesting the data twice. A useRef hook was added to Category.js to try to avoid this. 
     async function aggregateData (categoryArray){
         let data = []
         for (let i=0; i<categoryArray.length; i++){
@@ -60,6 +64,7 @@ async function executeSearch(term = "", categories = [], price = [0, -1]) {
         
     filteredResponse = aggregateData(parsedCategories)
 
+    // returns an array of products 
     } else {
         console.log("All product results incoming...")
         search_URL = all_products_URL
@@ -84,16 +89,17 @@ async function executeSearch(term = "", categories = [], price = [0, -1]) {
       
         filteredResponse = catalog.filter(item => searchExpression.test(item.title) || searchExpression.test(item.description) || searchExpression.test(item.category))
     
-        if (filteredResponse.length === 0){
-            console.log(`Search for "${term}" returned no results`)
-        } else {
-            console.log(`Search for "${term}" returned ${filteredResponse.length} results`)
-        }
-        // returns an array of products 
-       
+        //During testing this is helpul to see data on the given and returned items.
+        // if (filteredResponse.length === 0){
+        //     console.log(`Search for "${term}" returned no results`)
+        // } else {
+        //     console.log(`Search for "${term}" returned ${filteredResponse.length} results`)
+        // }
+        
     } 
 
-    if (price[1] !== -1){
+    // Filter is very touchy about being given non arrays, which often happens during testing. 
+    if (price[1] !== -1 && filteredResponse){
         
         const pricedResults = filteredResponse.filter((product) => 
             product.price >= price[0] && product.price <= price[1]
@@ -104,6 +110,12 @@ async function executeSearch(term = "", categories = [], price = [0, -1]) {
         filteredResponse = pricedResults
     }
 
+    if (ascending === true) {
+        
+        filteredResponse.sort((a,b) => (a.price > b.price) ? 1 : -1)
+    } else if (ascending === false){
+        filteredResponse.sort((a,b) => (a.price > b.price ) ? -1 : 1)   
+    } 
 
 
     return filteredResponse
