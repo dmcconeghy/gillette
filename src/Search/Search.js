@@ -1,5 +1,5 @@
 import '../styles/Header.css'
-import { useEffect, useContext } from 'react'
+import { useEffect, useContext, useRef } from 'react'
 import SearchForm from './SearchForm'
 import { executeSearch } from './SearchHelpers'
 import { SearchContext } from './SearchContext'
@@ -8,6 +8,16 @@ import { SearchContext } from './SearchContext'
 // It is called onSubmit rather than dynamically on key entry. 
 // By passing SearchContext the searchTerm and searchResults, this function can display data flexibly. 
 function Search() {
+
+  const firstUpdate = useRef(true);
+  useEffect(() => {
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+      return;
+    }
+   
+  });
+
 
   // Use the global SearchContext for these useState variables.
   // SearchResults is only here for data checking.
