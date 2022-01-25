@@ -15,10 +15,8 @@ function Body () {
         
         <div className="Sidebar">
 
-        <div className="CategoryFilters">
             <Category />
-        </div>
-
+        
         <div> Price sort buttons </div>
             <Sort /> 
         </div>
