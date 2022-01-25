@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { executeSearch } from './SearchHelpers';
 import { SearchContext } from './SearchContext'
 
@@ -8,32 +8,55 @@ import { SearchContext } from './SearchContext'
 // Future feature: Add a useState to make the sort toggle.
 // Sort fails currently to use selected filters
 
-function Sort() {
+function Sort(props) {
     const {
         searchTerm, 
         selectedCategories,
+        searchResults,
         setSearchResults 
       } = useContext(SearchContext)
 
-    const [isSortedUp, setIsSortedUp] = useState(false)
+      const [isSortedUp, setIsSortedUp] = useState(false)
 
-    async function handleClick(evt) {
-        evt.preventDefault()
-        setIsSortedUp(!isSortedUp);
+      function handleClick(){
         
-        console.log("Sorting results")
+        // console.log("You clicked")
+        setIsSortedUp(!isSortedUp);
+        // console.log(isSortedUp)
+        // console.log("handleclick", searchResults)
 
-        setSearchResults((await executeSearch(searchTerm, selectedCategories)).sort((a,b) => (a.price > b.price) ? 1 : -1))
+        // let currentResults = searchResults
 
-        // setSearchResults(async () => { 
-        //   (!isSortedUp) ? (await executeSearch(searchTerm, selectedCategories)).sort((a,b) => (a.price > b.price) ? 1 : -1)
-        //   : (await executeSearch(searchTerm, selectedCategories)).sort((b,a) => (a.price < b.price ? 1 : -1))
-        // })
-    }
+        // if (!isSortedUp){
+        //   currentResults.sort((a,b) => (a.price > b.price) ? 1 : -1)
+        // } else {
+        //   currentResults.sort((a,b) => (a.price > b.price ) ? -1 : 1)
+        // }
+
+      }
+      
+      useEffect(() => {
+        function sortResults(){
+
+          let currentResults = searchResults
+
+          if (!isSortedUp){
+            currentResults.sort((a,b) => (a.price > b.price) ? 1 : -1)
+          } else {
+            currentResults.sort((a,b) => (a.price > b.price ) ? -1 : 1)
+          }
+          
+          setSearchResults(currentResults)
+          // console.log("useEffect", searchResults)
+          //Why does a change in search results not result in a re-render?
+        }
+        sortResults()
+      }, [isSortedUp, searchResults, setSearchResults])
+    
     
   return (
     <div>
-        <button onClick={handleClick}>Sort by Price</button>
+        <button onClick={() => handleClick()}>Sort by Price&#8593;&#8595;</button>
     </div>
     )
 }
