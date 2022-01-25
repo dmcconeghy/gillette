@@ -32,16 +32,20 @@
     float: left;
     padding-left: 3px;
     margin-bottom: 10px;
+    text-align: left;
+    
 }
 
 .CategoryFilters ul {
     list-style-type: none;
+   
+    
 }
 
 .CategoryFilters label {
-    padding-left: 5px;
-    font-size: 16px;
-}
+    padding-left: 6px;
+    font-size: 14px;
+} 
 
 .CategoryFilters [type="checkbox"] {
     width: 15px;
