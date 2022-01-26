@@ -66,8 +66,7 @@ function Category(){
 
     //update the array of select box states
     const updateCheckedState = isChecked.map(
-      (check, index) => (index === categoryindex) ? !check : check
-    )
+      (check, index) => (index === categoryindex) ? !check : check)
     // This is necessary to create a controlled input.
     setIsChecked(updateCheckedState)
   }
