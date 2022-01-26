@@ -8,6 +8,7 @@ function Header() {
     return (
     <header className="Header">
         <div className="Navigation">
+        {console.debug("The App component has rendered")}
             <Logo />
             <Search />
         </div>

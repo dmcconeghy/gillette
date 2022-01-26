@@ -47,6 +47,7 @@ function PriceFilter() {
   return (
     <div>
         <div className="PriceFilter">
+        {console.debug("The PriceFilter component has rendered")}
         <p>Filter by price:</p>
             <ul>
                 <li>

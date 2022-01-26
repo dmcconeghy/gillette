@@ -102,6 +102,7 @@ function Category(){
  
   return (
     <div className="CategoryFilters">
+      {console.debug("The Catgeory component has rendered")}
         <p>Filter by category:</p>
       <ul>
           {categoriesArray.map((categoryname, index) => {

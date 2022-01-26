@@ -9,6 +9,7 @@ function ProductTable({ productsObject = null }) {
     return (
          
         <div className="ProductTable">
+            {console.debug("The ProductTable component has rendered")}
             { 
                 (productsObject.map(item => (
                     <ProductCard 

@@ -20,7 +20,7 @@ function Body () {
 
     return (
     <div className="BodyWrapper">
-        
+         {console.debug("The Body component has rendered")}
         <div className="Sidebar">
 
             <Category />

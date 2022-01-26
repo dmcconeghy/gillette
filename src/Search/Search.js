@@ -56,7 +56,8 @@ function Search() {
   }, [setSearchResults, searchTerm, selectedCategories, priceFilter, sortAscending]);
 
   return (
-    <div className="Search"> 
+    <div className="Search">
+      {console.debug("The Search component has rendered")} 
       <SearchForm search = { search } />
          {/* These two console.log show the search component rendering can be further refined to reduce state updates.
          {searchTerm ? console.log("Search component says you searched for", searchTerm) : null }

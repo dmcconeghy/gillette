@@ -24,6 +24,7 @@ function App() {
   
 return (
     <div className="App">
+      {console.debug("The App component has rendered")}
       <SearchContext.Provider value = { searchValues } >
         <Header />
         

@@ -21,6 +21,7 @@ function SearchForm({ search }) {
 
   return (
     <label className="SearchField">
+      {console.debug("The SearchField component has rendered")}
       <form onSubmit={handleSubmit}>
         <input type="search" value={term} placeholder="Search..." onChange={handleChange} /> 
         

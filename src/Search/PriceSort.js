@@ -63,6 +63,7 @@ function PriceSort(props) {
     
   return (
     <div className="PriceSort">
+      {console.debug("The PriceSort component has rendered")}
         <button onClick={(evt) => handleClick(evt)}>Sort Results By Price&#8593;&#8595;</button>
     </div>
     )
