@@ -58,7 +58,7 @@ Project can be found at: https://happy-tereshkova-56d808.netlify.app/
 
   #### 1/25/22
     I wrapped up and commited the implementation of price filtering. Filtering within search results and sorting by price are still not working as intended. Partially a design issue, the calling of exectuteSearch by different components is often overriding earlier results rather than accumulating a more intensive list of filters. An attempted rework of SearchHelpers to reduce unwanted re-renders was judged to be too lengthy for on-time product delivery. It's clear that the original logic is insufficient in precision and fails to handle variable-logging in a clear way. This means that, for example, searchResults and searchTerms are never really cleared from the SearchContext. This results in some unusual performance. Additionally, the design of the site, to load all products by default on initial app load or removal of all category checkboxes or on a null search mean that the products compound as more searches are made and the variable handling gets more inconsistent. A challenge to look forward to correcting in the future. 
-<details>
+</details>
 
 
 ### Bugs, Issues, & Refactor Tracking
