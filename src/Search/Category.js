@@ -1,30 +1,19 @@
 import '../styles/Body.css'
-import { useContext, useEffect, useRef, useState, useMemo } from 'react'
+import { useContext, useEffect, useState, useMemo } from 'react'
 import { SearchContext } from './SearchContext'
 import { executeSearch } from './SearchHelpers'
-// import axios from 'axios'
 
-// Category uses an array of category names to return a subselection of all products with the given selected categories.
-// Its current implementation does NOT work concurrently with price filters or search terms, awaitng a refactoring of SearchHelpers. 
-// This component is rather buggy and generates several errors if its executeSearch is provided with either a priceFilter or sortAscending search variable. 
-// A rework of this component is likely required in conjuction with a refactoring of the logic in executeSearch found in SearchHelpers.  
+// Category uses a stable category array as a map for a series of checkboxes. 
+// When the checkboxes are un/checked, a new searchResults is pushed and rendered. 
+// If all boxes are unchecked, it resets to the default search (using any term or filter already held in the Search Context),
 function Category(){
 
-  const firstUpdate = useRef(true);
-  useEffect(() => {
-    if (firstUpdate.current) {
-      firstUpdate.current = false;
-      return;
-    }
-   
-  });
-
   const {
-    searchTerm, 
+    searchTerm,
+    selectedCategories, 
     setSelectedCategories,
-    sortAscending,
-    priceFilter,
-    setSearchResults 
+    setSearchResults,
+    priceFilter 
   } = useContext(SearchContext)
 
   // This returns an array with all the categories as strings
@@ -68,6 +57,7 @@ function Category(){
     const updateCheckedState = isChecked.map(
       (check, index) => (index === categoryindex) ? !check : check)
     // This is necessary to create a controlled input.
+    // console.log(updateCheckedState)
     setIsChecked(updateCheckedState)
   }
 
@@ -76,33 +66,41 @@ function Category(){
 
        //when called it looks at isChecked and maps checked items into namedCategories
        const namedCategories = function convertCheckStateToNames() {
-        let temp = []
-        for(let i=0; i<categoriesArray.length; i++){
-          if (isChecked[i] === true) {
-            temp.push(categoriesArray[i])
+          let temp = []
+          for(let i=0; i<categoriesArray.length; i++){
+            if (isChecked[i] === true) {
+              temp.push(categoriesArray[i])
+            }
+            
           }
-        }
-        return temp
+          return temp
+       }
+
+      console.debug("Categories selected:", namedCategories())
+   
+      // Do we have any categories?
+      if (namedCategories().length > 0){
+        setSelectedCategories(namedCategories())
+        setSearchResults(await executeSearch(searchTerm, selectedCategories, priceFilter))
+        
       }
-      //This console line reveals Category often fires with [] resulting in unwanted re-renders. 
-      // console.log("Categories selected:", namedCategories())
 
-      
-      // This results in a category search using the filter buttons, say on the default products list. 
-      setSearchResults(await executeSearch(searchTerm, namedCategories()));
-      
-      // If we want to include category filters on other searches, the namedCategories must be set in SearchContext
-      setSelectedCategories(namedCategories())
-
-
+      // Are there no categories and we need to refresh and pull all results again
+      if (namedCategories().length === 0) {
+        setSelectedCategories(namedCategories())
+        setSearchResults(await executeSearch(searchTerm, categoriesArray, priceFilter))
+      }
+   
     }
     fetchCategories();
-  }, [isChecked, categoriesArray, searchTerm, setSearchResults, setSelectedCategories, priceFilter, sortAscending])
+    //adding selectedCategories results in infinte loops
+  }, [isChecked, categoriesArray, setSearchResults, searchTerm, priceFilter])
+
 
  
   return (
     <div className="CategoryFilters">
-      {console.debug("The Catgeory component has rendered")}
+      {console.debug("<Category /> has rendered")}
         <p>Filter by category:</p>
       <ul>
           {categoriesArray.map((categoryname, index) => {
