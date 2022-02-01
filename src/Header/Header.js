@@ -1,7 +1,6 @@
 // Header component wraps all top of page components such as the navigation menu, search bar, logo, and cart
 import '../styles/Header.css'
 import Logo from './Logo'
-import Search from '../Search/Search'
 import SearchForm from '../Search/SearchForm'
 
 
