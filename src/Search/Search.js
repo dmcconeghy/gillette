@@ -4,65 +4,54 @@ import SearchForm from './SearchForm'
 import { executeSearch } from './SearchHelpers'
 import { SearchContext } from './SearchContext'
 
-// Search uses a SearchForm callback to retrieve user inputted search terms. 
-// It is called onSubmit rather than dynamically on key entry. 
-// By passing SearchContext the searchTerm and searchResults, this function can display data flexibly. 
-function Search() {
+//Search is the default loader for all db products from the Fake Store API. 
+// It sets the initial state of searchResults to allProducts, returned from the executeSearch function in searchHelpers.js
+// This component should run ONCE on page-load. Thereafter all calls to executeSearch should come from UI. 
+
+function Search(){
+
+  const { setSearchResults } = useContext(SearchContext)
+
+  const allProducts = async () => {
+    console.debug("<Search /> returns default executeSearch with all products>")
+    return await executeSearch()
+}
 
   const firstUpdate = useRef(true);
-  useEffect(() => {
+  useEffect(() => { async function fetchData(){
+
     if (firstUpdate.current) {
       firstUpdate.current = false;
+      setSearchResults(await allProducts())
       return;
     }
-   
+  } fetchData()
   });
 
 
-  // Use the global SearchContext for these useState variables.
-  // SearchResults is only here for data checking.
-  const { searchTerm,
-          setSearchTerm,  
-          // searchResults,
-          setSearchResults,
-          selectedCategories, 
-          //setSelectedCategories,
-          priceFilter, 
-          //setPriceFilter,
-          sortAscending,
-          //setSortAscending
-        } = useContext(SearchContext)
+  // This older code was resulting in searchResults = [] at the end of the rendering call. 
+  // It may be desirable to reset the searchResults to their default but not through this component. 
+  // useEffect(() => { async function fetchProducts() {
+  //     if (searchResults.length === 0){
+  //       setSearchResults(await allProducts())
+  //       console.log("Search says searchResults", searchResults)
+  //     }
+  //   } 
 
-  // set the state of the inputted seach term (obtained from SearchForm)
-  function search(term) {
-     setSearchTerm(term);
-  }
+  //   fetchProducts()
+  //   // removing searchResults and setSearchResults as a dependency ensures Search fires only ONCE on app load. 
+  // },  [])
 
-  // When there's a change in state of the search term, 
-  // fetch the products and set it as the item state
-  useEffect(function fetchOnChange() {
-    async function fetchProducts() {
-      
-      // We need to wait for executeSearch to make the api call for products.
-       setSearchResults(await executeSearch(searchTerm, selectedCategories, priceFilter, sortAscending));
-      // It may be better to let SearchHelpers take the terms supplied from any calls made to it?
-      // This change means category searches appear for a moment before being overwritten by all products.
-      // setSearchResults(await executeSearch());
-        
-    }
-    fetchProducts();
-    //Adding dependency for selectedCategories has a major impact here worth investigating.
-    // It's likely that for advanced searching we will need both searchTerm and selectedCategories preserved but not in useEffect on any search change. 
-  }, [setSearchResults, searchTerm, selectedCategories, priceFilter, sortAscending]);
-
+  // if (!searchResults) {
+  //   console.debug("SearchResults has returned falsey as type:", typeof(searchResults) )
+  // } else {
+  //     console.debug(`The Search component has rendered with ${searchResults.length} results`)
+  //   }
+  
   return (
-    <div className="Search">
-      {console.debug("The Search component has rendered")} 
-      <SearchForm search = { search } />
-         {/* These two console.log show the search component rendering can be further refined to reduce state updates.
-         {searchTerm ? console.log("Search component says you searched for", searchTerm) : null }
-        {searchResults ? console.log("Search component says your results are", searchResults) : null }  */}
-    </div>
+      <>
+      {console.debug("<Search /> rendered")}
+    </>
   )
 }
 
