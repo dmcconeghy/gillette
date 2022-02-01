@@ -2,15 +2,16 @@
 import '../styles/Header.css'
 import Logo from './Logo'
 import Search from '../Search/Search'
+import SearchForm from '../Search/SearchForm'
 
 
 function Header() {
     return (
     <header className="Header">
         <div className="Navigation">
-        {console.debug("The App component has rendered")}
+        {console.debug("<Header /> rendered")}
             <Logo />
-            <Search />
+            <SearchForm />
         </div>
     </header>
     )
