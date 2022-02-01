@@ -2,14 +2,11 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import { SearchContext } from './SearchContext'
 
 
-// This function accepts an array of products and toggles their sorting ascending/descending.
-// It takes advantage of SearchContext to fetch and update the search results and supply the selected category.
-// Future feature: Add a useState to make the sort toggle.
-// Sort fails currently to use selected filters
+// This function takes whatever results are currently held in the global searchResults and sorts them. 
+// Pressing the button toggle the effect. Presently is does NOT reset.
+// There may be a bug with the order that sort is called, causing a quick resort in certain cases. 
 
-
-// Reducing console clutter temporarily, this is definitely resulting in additional and unwanted renders. 
-function PriceSort(props) {
+function PriceSort() {
 
   const firstUpdate = useRef(true);
   useEffect(() => {
@@ -17,53 +14,55 @@ function PriceSort(props) {
       firstUpdate.current = false;
       return;
     }
-   
   });
 
     const {
         searchResults,
-        setSearchResults, 
+        setSearchResults,
+        setSortAscending
       } = useContext(SearchContext)
 
-      const [isSortedUp, setIsSortedUp] = useState(false)
+      const [isSortedUp, setIsSortedUp] = useState(null)
       
-
-
+     
       function handleClick(evt){
         evt.preventDefault()
-        
-        
+        //On initial click we should set the state to false and then begin toggling it. 
+        if (isSortedUp === null){
+          setIsSortedUp(false)
+        }
         setIsSortedUp(!isSortedUp);
-        console.log("You clicked sort by price ascending =", isSortedUp)
+        console.debug("You clicked sort by price ascending =", isSortedUp)
 
       }
       
       useEffect(() => {
         function sortResults(){
-
-          let sortedResults = searchResults
-
-          if (!isSortedUp){
-            sortedResults.sort((a,b) => (a.price > b.price) ? 1 : -1)
+          
+          // Don't fire or set searchResults if the sort button hasn't been pushed. 
+          if (isSortedUp !== null){
             
-          } else if (isSortedUp){
-            sortedResults.sort((a,b) => (a.price > b.price ) ? -1 : 1)
+            let sortedResults = searchResults
+            
+            if (!isSortedUp){
+              sortedResults.sort((a,b) => (a.price > b.price) ? 1 : -1)
+              setSortAscending(true)
 
-          }
+            } else if (isSortedUp){
+              sortedResults.sort((a,b) => (a.price > b.price ) ? -1 : 1)
+              setSortAscending(false)
+            }
           
-          setSearchResults(sortedResults)
-         
-          
-          // Why does a change in search results not result in a re-render?
-          // Due to the useState bug in the app, results appear to be correctly sorted on the accidental re-renders. 
+            setSearchResults(sortedResults)
         }
+      }
         sortResults()
-      }, [isSortedUp, searchResults, setSearchResults])
+      }, [isSortedUp, searchResults, setSearchResults, setSortAscending])
     
     
   return (
     <div className="PriceSort">
-      {console.debug("The PriceSort component has rendered")}
+      {console.debug("<PriceSort /> rendered")}
         <button onClick={(evt) => handleClick(evt)}>Sort Results By Price&#8593;&#8595;</button>
     </div>
     )
