@@ -13,7 +13,11 @@ Contact: david.mcconeghy@gmail.com
 
 Project Summary on submit 1/25/22: 
 
-This was the first React app I've ever made. It was absolutely a trial by fire for me and a jump ahead of a month or two in my bootcamp. I think the most challenging decision I had to make for this app was how to implement the search alongside the filters. I approached these indpendently from the start and was punished later by that choice. In hindsight, it's clearer that I should have begun with an expansive searchContext that I could have used across components. Adding extra features on top of my original search led to complicated results, which remain in the program's tendency to render results several times. These are the asterisks below on the "Allow users to filter on product results (Price, Category)" and "Allower user to sort on product price." Users can filter all products by price or by multiple categories, but they cannot do so concurrently. The price sort is also a step-behind in rendering, showing the next set of results in the requested up or down order. I ran out of time to fix these issues and they will be next on my to-do list for this project, which I will continue to work on to improve my burgeoning skills in React. I think this was appropriately challenging and, if I were to start over knowning what I learned on this project, I could likely get this far in a third of the time. One thing for future use of this test: the Fake API has several limitations that made designing and testing challenging. Its dataset has irregular titles, a variety of image sizes, and several other quirks. While these are fun challenges to think about -- after all any given site might run into issues with its database -- it might be worth noting ahead of time to users for them to be aware of when examining the API. Thank you again for the oppportunity to complete this challenge. The next stage of the project should be creating a solid mobile-first design base. If I had successfully debugged the issues in the filters, I would have begun this work immediately. Overall, I found this task extremely rewarding and look forward to making improvements on it! 
+This was the first React app I've ever made. It was absolutely a trial by fire for me and a jump ahead of a month or two in my bootcamp. I think the most challenging decision I had to make for this app was how to implement the search alongside the filters. I approached these indpendently from the start and was punished later by that choice. In hindsight, it's clearer that I should have begun with an expansive searchContext that I could have used across components. Adding extra features on top of my original search led to complicated results, which remain in the program's tendency to render results several times. These are the asterisks below on the "Allow users to filter on product results (Price, Category)" and "Allower user to sort on product price." Users can filter all products by price or by multiple categories, but they cannot do so concurrently. The price sort is also a step-behind in rendering, showing the next set of results in the requested up or down order. I ran out of time to fix these issues and they will be next on my to-do list for this project, which I will continue to work on to improve my burgeoning skills in React. I think this was appropriately challenging and, if I were to start over knowning what I learned on this project, I could likely get this far in a third of the time. One thing for future use of this test: the Fake API has several limitations that made designing and testing challenging. Its dataset has irregular titles, a variety of image sizes, and several other quirks. While these are fun challenges to think about -- after all any given site might run into issues with its database -- it might be worth noting ahead of time to users for them to be aware of when examining the API. Thank you again for the oppportunity to complete this challenge. The next stage of the project should be creating a solid mobile-first design base. If I had successfully debugged the issues in the filters, I would have begun this work immediately. Overall, I found this task extremely rewarding and look forward to making improvements on it!
+
+Update on 2/1/22:
+
+I have worked on a branch of the project that significantly reduces bugs and errors. This branch will be merged with the main in the future and hosted at the same link below. 
 
 Project can be found at: https://happy-tereshkova-56d808.netlify.app/
 
@@ -24,8 +28,8 @@ Project can be found at: https://happy-tereshkova-56d808.netlify.app/
 - [x] Display all products
 - [x] Allow user to search through products
 - [x] Allow users to filter on product results
-  - Price*
-  - Category*
+  - [x]Price
+  - [x]Category
 - [x] Allow user to sort on product price
 
 ### **Project reach goals:**
@@ -57,37 +61,38 @@ Project can be found at: https://happy-tereshkova-56d808.netlify.app/
   After finishing the initial coding for sorting by price, I next turned to making category filters be multiple rather than singular and to implement the last feature of filtering by price. Returning items from a single category was straightforward, but I needed to revisit the searchContext and search component to merge/reduce multiple category results on the fly. It was quite challenging making category filters and I had to make use of what I had already learned about useState, useEffect, and useContext from creating the search feature. Very rewarding to see it work and it was fun to code. The challenge continued, however, as selecting filters was a step behind, and using filters after search results returned the full category rather than the search results category subset. It was gratifying to finally get useState and useEffect to work properly and to see the sort correctly append categories of products together which could then be sorted. In the end I realized that the design of my Category filters was a blend of two approaches: a) a select-box based category filter for search results and b) a category search button. I will return to this tomorrow to see if I can implement a fix. 
 
   #### 1/25/22
-  I wrapped up and commited the implementation of price filtering. Filtering within search results and sorting by price are still not working as intended. Partially a design issue, the calling of exectuteSearch by different components is often overriding earlier results rather than accumulating a more intensive list of filters. An attempted rework of SearchHelpers to reduce unwanted re-renders was judged to be too lengthy for on-time product delivery. It's clear that the original logic is insufficient in precision and fails to handle variable-logging in a clear way. This means that, for example, searchResults and searchTerms are never really cleared from the SearchContext. This results in some unusual performance. Additionally, the design of the site, to load all products by default on initial app load or removal of all category checkboxes or on a null search mean that the products compound as more searches are made and the variable handling gets more inconsistent. A challenge to look forward to correcting in the future. 
+  I wrapped up and commited the implementation of price filtering. Filtering within search results and sorting by price are still not working as intended. Partially a design issue, the calling of exectuteSearch by different components is often overriding earlier results rather than accumulating a more intensive list of filters. An attempted rework of SearchHelpers to reduce unwanted re-renders was judged to be too lengthy for on-time product delivery. It's clear that the original logic is insufficient in precision and fails to handle variable-logging in a clear way. This means that, for example, searchResults and searchTerms are never really cleared from the SearchContext. This results in some unusual performance. Additionally, the design of the site, to load all products by default on initial app load or removal of all category checkboxes or on a null search mean that the products compound as more searches are made and the variable handling gets more inconsistent. A challenge to look forward to correcting in the future.
+
+  #### 1/26/22 - 2/1/22
+  I set aside a bit of time every day to bug hunt. I have covered many additional edge cases and significant reduced the number of errant renderings. The price filters are snappy, the sorting works instantly, and the min max cover a wide range of potential error-inducing options (empty, non-numbers, etc.) The categories can also now be used in conjunction with search terms as well as with price filters. Given the small size of the database, more than a few options return empty. A limited logic has been added to indicate in most circumstances that a search has returned no results, but this doesn't work in every case. (A pre-selected price filter combined with a category, for instance.) The logic for such messages is more complex than I anticipated and more time-consuming than I can afford right now. This branch will be merged into the main in the future.  
 </details>
 
 
 ### Bugs, Issues, & Refactor Tracking
 <summary> Bugs and issues being worked on during refactoring </summary>
 <details>
+
   - Search **bugs** 
-    - ~~"clothing" returns 0 items;~~ *Found a misplaced ) causing category and description not to be searched.* 
     -  Using multiple search terms fails if words not found in exactly that order/spacing.
     -  Potentially unwanted substring search results men's clothing retuns women's clothing
-  - UseState **issue**
-    - ~~~I believe searches are making un-needed calls. These are clearer with console.log in Search lines 43-44 where we can see potentially unwanted data fetching due to the order of useState/useEffect calls. Also visible during searches with products swapping places rapidly before final render?~~ *Refactor fixed this*
-  - SearchHelpers **refactor** 
-    - *Refactored searchHelpers (and product / productTables components) to use the API returned object rather than using productIDs and calling the API a second time*
-    - ~~~Search helper takes the executeSearch and returns productIDs as an array.~~~
-    - ~~~If executeSearch returned an array of product objects we could reduce API calls especially cf. useState bugs~~~
-  - Categories **bug** 
-    - *Refactored category code to explicitly identify the categories and pass their value to the API's built in category route."* 
-    - ~~~Clicking "Men's Clothing" also returns "Women's Clothing"~~~
-    - ~~~I'm incorrectly implementing useState/useEffect and the select boxes are returning on second click the first click's results. Sorting by price correctly identifies the currently checked boxes.~~~ *Fixed by correctly alinging useState and useContext variables* 
-  - Sorting **bugs** **issues**
-    - *issue* ~~~Price sorting works, but only on re-renders, which may mean a given search has already been overwritten. The sorting also seems to generate re-renders, which close attention to rapid re-renders can identify by the swapping of the bluish Fjallraven ($109.95) with the cheapest item Opna Women's shit ($7.95).~~~ *Refactor fixed this*   
-    - *issue* Searching all products returns results from multiple categories as expected. If a category filter is then chosen, the results returned are all products from the category rather than the subset of items in that category from the search results. *A fix will require tweaks to SearchHelper's logic by checking for empty or in useContext searchTerms and then sustaining them during the filter/sorting.* 
-    - *bug* ~~~Filtering to no items (all > electronics(on) > electonics(off)) should return all products again.~~~ *Fixed by changing SearchHelpers logic to only show category filters if categoryArray > 0 rather than if it was null because an empty category array isn't null (though both are falsy)*  
+ -  Min/Max **bugs**
+    -  The "Go" button often needs to be pressed twice. useState is not passing the onSubmit to an useEffect, and is therefore a step behind. 
+ - Price Filters used together with Category filters **bugs**
+   - The last price filter is retained, causing blank returns to appear upon selection of certain combinations of price/category (eg., women's clothing over $100). The results are correct (there are no women's clothing items over $100 in the database), but the lack of error message can be confusing. 
+ -  
+  
+
+ 
 </details>
 
 ### What I would implement next
-  - Error handling, especially for axios. More than a few times unwanted recursions locked the browser and throttled future API calls for a short while. All API calls should be wrapped with try/catch, but other error handling would have been very helpful, such as type-checking all arrays that were to be mapped or filter to throw an error rather than crash the application. 
-  - Active search results. Presently terms are only passed on search form submission, not during search term entry.
-  - A revised structure for search to combine it with category and price filtering. These features all work indpendently, but not in conjuction. 
-  - Major design overhaul is desirable, *especially for mobile devices*. The current and modest design favors testing ease over enchanced visual appeal. This might be ideal for the next round of bug fixes before adding other components like a detailed product page, a splash/landing page, or more advanced items like cart functionality. 
+  - Responsive mobile layout.
+  - A No results handler that offers better indicator for results returning empty.
+  - A clear category filters button. 
+  - An highlight for the current price filter. 
+  - Better reset functionality when searches reach a dead-end.
+  - Better notices about the terms/categories/prices that have resulted in any given search endpoint. 
+  - Features on the "Project Reach Goals" listed above such as a detailed product page and shopping cart.
+
 
    
