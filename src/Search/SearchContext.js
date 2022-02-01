@@ -9,7 +9,7 @@ export const SearchContext = createContext()
 //   setSearchTerm: () => {},
 //   searchResults: [],
 //   setSearchResults: () => {},
-//   selectedCategories: null,
+//   selectedCategories: [],
 //   setSelectedCategories: () => {},
 //   priceFilter: [0, -1],
 //   setPriceFilter: () => {},
