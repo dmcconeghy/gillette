@@ -12,7 +12,7 @@ function ProductCard(props) {
 
     return (
         <div className="ProductCard">
-            {console.debug("A ProductCard component has rendered")}
+            {console.debug("<ProductCard /> rendered")}
             {props ? 
             (
                 <div className="Product grow">
