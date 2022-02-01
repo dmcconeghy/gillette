@@ -171,7 +171,7 @@ async function executeSearch(term = "", categories = [], price = [0, -1]){
     // Haven't returned finalResults yet? Time to pass our accumulator's results to it. 
     finalResults = searchResultsAccumulator
 
-    console.log(`executeSearch() has finished with ${finalResults.length} final results for searchTerm(${term}), categories(${categories}), price(${price})`)
+    // console.log(`executeSearch() has finished with ${finalResults.length} final results for searchTerm(${term}), categories(${categories}), price(${price})`)
 
     return finalResults
 }

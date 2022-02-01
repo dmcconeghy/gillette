@@ -1,6 +1,5 @@
 import '../styles/Header.css'
 import { useEffect, useContext, useRef } from 'react'
-import SearchForm from './SearchForm'
 import { executeSearch } from './SearchHelpers'
 import { SearchContext } from './SearchContext'
 

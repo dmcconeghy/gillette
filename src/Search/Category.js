@@ -94,7 +94,8 @@ function Category(){
     }
     fetchCategories();
     //adding selectedCategories results in infinte loops
-  }, [isChecked, categoriesArray, setSearchResults, searchTerm, priceFilter])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isChecked, categoriesArray, setSearchResults, searchTerm, priceFilter, setSelectedCategories])
 
 
  
