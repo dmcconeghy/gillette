@@ -4,28 +4,33 @@ import Body from '../Body/Body'
 import { useState, useMemo } from 'react'
 import { SearchContext } from '../Search/SearchContext'
 
+import Search from '../Search/Search'
+
 function App() {
 
   const [ searchTerm, setSearchTerm ] = useState("")
-  const [ searchResults, setSearchResults ] = useState([])
-  const [ selectedCategories, setSelectedCategories ] = useState(null)
+  const [ selectedCategories, setSelectedCategories ] = useState([])
   const [ priceFilter, setPriceFilter ] = useState([0, -1])
   const [ sortAscending, setSortAscending ] = useState(null)
+  // SearchResults defaults to allProducts on app-load. 
+  const [ searchResults, setSearchResults ] = useState([])
 
   //Memoizing these values should mean they're only updated on a change in searchTerm, selectedCategories, or searchReuslts
   const searchValues = useMemo(
     () => ({  searchTerm, setSearchTerm, 
-              searchResults, setSearchResults, 
               selectedCategories, setSelectedCategories, 
               priceFilter, setPriceFilter,
-              sortAscending, setSortAscending}),
-    [searchTerm, searchResults, selectedCategories, priceFilter, sortAscending]
+              sortAscending, setSortAscending,
+              searchResults, setSearchResults
+            }),
+    [searchTerm, selectedCategories, priceFilter, sortAscending, searchResults]
   );
   
 return (
     <div className="App">
-      {console.debug("The App component has rendered")}
-      <SearchContext.Provider value = { searchValues } >
+      {console.debug("<App /> rendered")}
+      <SearchContext.Provider value = { searchValues } >'
+        <Search />
         <Header />
         
         <Body />
