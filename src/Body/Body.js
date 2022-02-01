@@ -5,22 +5,21 @@ import ProductTable from '../Products/ProductTable'
 import Category from '../Search/Category'
 import PriceSort from '../Search/PriceSort'
 import PriceFilter from '../Search/PriceFilter'
+import Results from './Results'
 
 
 function Body () {
 
     const { 
-        // searchTerm, 
-        searchResults, 
-        // selectedCategories 
+        searchResults
     }  = useContext(SearchContext)
+    
 
-    // An early attempt to make a simple but dynamic search/category alert revealed a more challenging logic function was required. 
-    // The included lines 28-31 are only for testing. 
+    
 
     return (
     <div className="BodyWrapper">
-         {console.debug("The Body component has rendered")}
+         {console.debug("<Body /> rendered")}
         <div className="Sidebar">
 
             <Category />
@@ -32,10 +31,7 @@ function Body () {
 
         </div>
         <div className="Content">
-            <div>
-                {/* <p>{`Your last search term was "${searchTerm}" and returned ${searchResults? searchResults.length : "no"} results`}</p>
-                <p>{`Your selected categories are: ${selectedCategories}`}</p> */}
-            </div>
+            <Results />
             <div className="ProductTable">
                 
                 <ProductTable productsObject = { searchResults } /> 
